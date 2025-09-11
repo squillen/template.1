@@ -11,7 +11,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "toy",
     imageUrl: "/placeholder-t1old.png",
-    sku: '1234',
+    sku: 'H123THP',
   },
   {
     uuid: "2",
@@ -21,7 +21,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "toy",
     imageUrl: "/brown-orange-plush-monkey.png",
-    sku: '1234',
+    sku: 'HFPP12HAP',
   },
   {
     uuid: "3",
@@ -31,7 +31,7 @@ export const defaultProducts: Product[] = [
     stock: 2,
     category: "accessory",
     imageUrl: "/placeholder-q8gyj.png",
-    sku: '1234',
+    sku: 'H123THPF',
   },
   {
     uuid: "4",
@@ -41,7 +41,7 @@ export const defaultProducts: Product[] = [
     stock: 2,
     category: "accessory",
     imageUrl: "/placeholder-05r2x.png",
-    sku: '1234',
+    sku: 'H123THPA',
   },
   {
     uuid: "5",
@@ -51,7 +51,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "accessory",
     imageUrl: "/placeholder-irykk.png",
-    sku: '1234',
+    sku: 'H123THPS',
   },
   {
     uuid: "6",
@@ -61,7 +61,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "accessory",
     imageUrl: "/placeholder-1dj9c.png",
-    sku: '1234',
+    sku: 'H123THPT',
   },
   {
     uuid: "7",
@@ -71,7 +71,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "toy",
     imageUrl: "/blue-white-rope-toy.png",
-    sku: '1234',
+    sku: 'H123THPQ',
   },
   {
     uuid: "8",
@@ -81,7 +81,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "accessory",
     imageUrl: "/placeholder-t7tjp.png",
-    sku: '1234',
+    sku: 'H123THPW',
   },
   {
     uuid: "9",
@@ -91,7 +91,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "accessory",
     imageUrl: "/black-adjustable-pet-collar.png",
-    sku: '1234',
+    sku: 'H123THPE',
   },
   {
     uuid: "10",
@@ -101,7 +101,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "grooming",
     imageUrl: "/blue-grooming-glove.png",
-    sku: '1234',
+    sku: 'H123THPP',
   },
   {
     uuid: "11",
@@ -111,7 +111,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "grooming",
     imageUrl: "/placeholder.svg?height=300&width=300",
-    sku: '1234',
+    sku: 'H123THPL',
   },
   {
     uuid: "12",
@@ -121,7 +121,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "grooming",
     imageUrl: "/placeholder.svg?height=300&width=300",
-    sku: '1234',
+    sku: 'H123THKP',
   },
   {
     uuid: "13",
@@ -131,7 +131,7 @@ export const defaultProducts: Product[] = [
     stock: 2,
     category: "accessory",
     imageUrl: "/placeholder.svg?height=300&width=300",
-    sku: '1234',
+    sku: 'H123TUHP',
   },
   {
     uuid: "14",
@@ -141,7 +141,7 @@ export const defaultProducts: Product[] = [
     stock: 5,
     category: "food",
     imageUrl: "/placeholder.svg?height=300&width=300",
-    sku: '1234',
+    sku: 'H12T3THP',
   },
   {
     uuid: "15",
@@ -151,7 +151,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "accessory",
     imageUrl: "/placeholder.svg?height=300&width=300",
-    sku: '1234',
+    sku: 'H123RTHP',
   },
   {
     uuid: "16",
@@ -161,7 +161,7 @@ export const defaultProducts: Product[] = [
     stock: 1,
     category: "accessory",
     imageUrl: "/placeholder.svg?height=300&width=300",
-    sku: '1234',
+    sku: 'H12V3THP',
   },
 ]
 

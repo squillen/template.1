@@ -9,11 +9,9 @@ import { Label } from "@/uicomponents/ui/label"
 import { Separator } from "@/uicomponents/ui/separator"
 import { useToast } from "@/uicomponents/ui/use-toast"
 import { PayPalButton } from "@/uicomponents/paypal-button"
-import { Loader2, CreditCard, Truck, Shield } from "lucide-react"
+import { Loader2, Truck, Shield } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-
-
 
 export default function CheckoutPage() {
   const { items, getTotalPrice, clearCart } = useCart()

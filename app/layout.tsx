@@ -3,9 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/uicomponents/theme-provider"
-import { Toaster } from "@/uicomponents/ui/toaster"
-import { PayPalButtons } from "@/components/ui/paypal-buttons";
-import Script from "next/script";
+import { Toaster } from "@/uicomponents/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,14 +29,6 @@ export default function RootLayout({
         >
           {children}
           <Toaster />
-
-          {/* PayPal Cart SDK - Exactly as PayPal suggests */}
-          <Script
-            src="https://www.paypalobjects.com/ncp/sb/cart/cart.js"
-            data-merchant-id="UR72V6GE5FWDQ"
-            strategy="beforeInteractive"
-          />
-          <PayPalButtons />
         </ThemeProvider>
       </body>
     </html>

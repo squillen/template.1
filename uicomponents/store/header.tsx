@@ -17,12 +17,6 @@ export function Header() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <nav className="flex items-center space-x-6">
             <Link
-              href="/"
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              Products
-            </Link>
-            <Link
               href="/about"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
