@@ -7,11 +7,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "setup": "cp env.example .env.local && echo 'Template setup complete! Edit .env.local with your settings.'",
-    "template:electronics": "cp examples/electronics-store.config.ts lib/config.ts && echo 'Switched to electronics store template'",
-    "template:clothing": "cp examples/clothing-store.config.ts lib/config.ts && echo 'Switched to clothing store template'",
-    "template:books": "cp examples/bookstore.config.ts lib/config.ts && echo 'Switched to bookstore template'",
-    "template:vegetables": "git checkout lib/config.ts && echo 'Switched to vegetables store template'"
+    "setup": "cp env.example .env.local && echo 'Template setup complete! Edit .env.local with your settings.'"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
