@@ -1,49 +1,63 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { ProductGrid } from "@/components/product-grid"
-import { products } from "@/lib/config"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, Filter } from "lucide-react"
+import Link from "next/link";
+import { products } from "@/lib/config";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Search } from "lucide-react";
 
 export default function ProductsPage() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("all")
-  const [sortBy, setSortBy] = useState("name")
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [sortBy, setSortBy] = useState("name");
 
   // Get unique categories
-  const categories = ["all", ...Array.from(new Set(products.map(p => p.category).filter(Boolean) as string[]))]
+  const categories = [
+    "all",
+    ...Array.from(
+      new Set(products.map((p) => p.category).filter(Boolean) as string[])
+    ),
+  ];
 
   // Filter and sort products
   const filteredProducts = products
-    .filter(product => {
-      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           product.description.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
-      return matchesSearch && matchesCategory
+    .filter((product) => {
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory =
+        selectedCategory === "all" || product.category === selectedCategory;
+      return matchesSearch && matchesCategory;
     })
     .sort((a, b) => {
       switch (sortBy) {
         case "price-low":
-          return a.price - b.price
+          return a.price - b.price;
         case "price-high":
-          return b.price - a.price
+          return b.price - a.price;
         case "name":
-          return a.name.localeCompare(b.name)
+          return a.name.localeCompare(b.name);
         default:
-          return 0
+          return 0;
       }
-    })
+    });
 
   return (
     <div className="bg-background min-h-screen">
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Our Products</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            Our Products
+          </h1>
           <p className="text-muted-foreground">
             Discover our wide range of high-quality products
           </p>
@@ -64,7 +78,10 @@ export default function ProductsPage() {
             </div>
 
             {/* Category Filter */}
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <Select
+              value={selectedCategory}
+              onValueChange={setSelectedCategory}
+            >
               <SelectTrigger className="w-full sm:w-48">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
@@ -100,8 +117,8 @@ export default function ProductsPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  setSearchTerm("")
-                  setSelectedCategory("all")
+                  setSearchTerm("");
+                  setSelectedCategory("all");
                 }}
               >
                 Clear Filters
@@ -114,18 +131,27 @@ export default function ProductsPage() {
         {filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="bg-card border border-border rounded-lg p-4 hover:shadow-lg transition-shadow">
+              <div
+                key={product.id}
+                className="bg-card border border-border rounded-lg p-4 hover:shadow-lg transition-shadow"
+              >
                 <div className="aspect-square relative mb-4 overflow-hidden rounded-md">
-                  <img 
-                    src={product.image || "/placeholder.svg"} 
+                  <img
+                    src={product.image || "/placeholder.svg"}
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="font-semibold text-card-foreground mb-2">{product.name}</h3>
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{product.description}</p>
+                <h3 className="font-semibold text-card-foreground mb-2">
+                  {product.name}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                  {product.description}
+                </p>
                 <div className="flex items-center justify-between">
-                  <p className="text-lg font-bold text-primary">${product.price.toFixed(2)}</p>
+                  <p className="text-lg font-bold text-primary">
+                    ${product.price.toFixed(2)}
+                  </p>
                   {product.category && (
                     <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
                       {product.category}
@@ -138,7 +164,10 @@ export default function ProductsPage() {
                       View Details
                     </Button>
                   </Link>
-                  <div id={`paypal-add-to-cart-${product.id}`} className="w-full"></div>
+                  <div
+                    id={`paypal-add-to-cart-${product.id}`}
+                    className="w-full"
+                  ></div>
                 </div>
               </div>
             ))}
@@ -148,15 +177,17 @@ export default function ProductsPage() {
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="h-8 w-8 text-muted-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">No products found</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">
+              No products found
+            </h3>
             <p className="text-muted-foreground mb-4">
               Try adjusting your search or filter criteria
             </p>
             <Button
               variant="outline"
               onClick={() => {
-                setSearchTerm("")
-                setSelectedCategory("all")
+                setSearchTerm("");
+                setSelectedCategory("all");
               }}
             >
               Clear Filters
@@ -165,5 +196,5 @@ export default function ProductsPage() {
         )}
       </div>
     </div>
-  )
+  );
 }

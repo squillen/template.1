@@ -20,9 +20,10 @@ export function PayPalButtons() {
           const paypalButtonId = storeConfig.paypal.buttonIds[product.id as keyof typeof storeConfig.paypal.buttonIds]
           if (paypalButtonId) {
             const container = document.getElementById(`paypal-add-to-cart-${product.id}`)
-            if (container) {
-              container.innerHTML = `<paypal-add-to-cart-button data-id="${paypalButtonId}"></paypal-add-to-cart-button>`
-              ;(window as any).cartPaypal.AddToCart({ id: paypalButtonId })
+            const paypalCart = (window as any).cartPaypal
+            if (container && paypalCart) {
+              container.innerHTML = `<paypal-add-to-cart-button data-id="${paypalButtonId}"></paypal-add-to-cart-button>`;
+              paypalCart.AddToCart({ id: paypalButtonId });
             }
           }
         })
