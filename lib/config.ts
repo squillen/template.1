@@ -12,108 +12,141 @@ export interface Product {
 
 // Store configuration
 export const storeConfig = {
-  name: "VeggieFresh",
-  tagline: "Fresh Organic Vegetables",
-  description: "Farm-fresh, organic vegetables delivered straight to your door. Sustainably grown with care for you and the environment.",
+  name: "Pet Supplies Co.",
+  tagline: "High Quality Pet Supplies",
+  description:
+    "Your one-stop shop for all your pet needs. From food to toys, we have everything to keep your furry friends happy and healthy.",
+  logo: "/placeholder-logo.svg",
   currency: "USD",
   currencySymbol: "$",
   paypal: {
-    merchantId: "PRBQR9MAHMDL6", // Your PayPal merchant ID
-    // Each product needs a unique PayPal button ID from PayPal Business account
+    merchantId: process.env.PAYPAL_MERCHANT_ID,
+    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "",
+    environment:
+      (process.env.NEXT_PUBLIC_PAYPAL_ENVIRONMENT as
+        | "sandbox"
+        | "production") || "sandbox",
     buttonIds: {
-      1: "HBV9P6CL2FPJ8",  // Organic Tomatoes
-      2: "QF4JAPCKSZ972",  // Fresh Carrots
-      3: "A9ZZ7Y9AENR76",  // Organic Spinach
-      4: "JP46X5AZGAB7A",  // Bell Peppers
-      5: "RQNZ5GRDPRUY2",  // Organic Broccoli
-      6: "YYZSAERVFLBDC",  // Sweet Potatoes
-      7: "PPFCRBR5W59RG",  // Organic Lettuce
-      8: "8H2XH6LR4HV4C",  // Fresh Cucumbers
-    }
-  }
-}
+      1: "CDM23NV2A24BE",
+      2: "GPCAKRAAPJ62Q",
+      3: "DTFTJ3STWNJTL",
+      4: "MC9H3C2WS7VV4",
+      5: "V95LVXVUFMJLS",
+      6: "JANQEGJ64FMA8",
+      7: "D297EUU3DA6G6",
+      8: "CBQRKBJQ9EJJS",
+      9: "UEWJUA4MBLNUC",
+      10: "GH3AQEQWPQ9MN",
+    },
+  },
+};
 
 // Default products data
 export const products: Product[] = [
   {
     id: 1,
-    name: "Organic Tomatoes",
-    price: 4.99,
+    name: "dog leash",
+    price: 15.99,
     image: "/placeholder.svg?height=200&width=200",
-    description: "Vine-ripened organic tomatoes, perfect for salads and cooking",
-    category: "Vegetables",
+    description:
+      "Strong and durable nylon dog leash with comfortable grip handle",
+    category: "Accessories",
     inStock: true,
-    sku: "TOM-001"
+    sku: "TOM-001",
   },
   {
     id: 2,
-    name: "Fresh Carrots",
-    price: 2.99,
+    name: "dog bed",
+    price: 49.99,
     image: "/placeholder.svg?height=200&width=200",
-    description: "Sweet, crunchy carrots packed with vitamins",
-    category: "Vegetables",
+    description: "Soft and comfortable orthopedic dog bed with washable cover",
+    category: "Bedding",
     inStock: true,
-    sku: "CAR-002"
+    sku: "CAR-002",
   },
   {
     id: 3,
-    name: "Organic Spinach",
-    price: 3.49,
+    name: "cat halloween string toy",
+    price: 6.99,
     image: "/placeholder.svg?height=200&width=200",
-    description: "Nutrient-rich baby spinach leaves, perfect for salads",
-    category: "Leafy Greens",
+    description:
+      "Fun Halloween-themed string toy with feathers and bells for cats",
+    category: "Toys",
     inStock: true,
-    sku: "SPI-003"
+    sku: "SPI-003",
   },
   {
     id: 4,
-    name: "Bell Peppers",
-    price: 5.99,
+    name: "cat litter box",
+    price: 34.99,
     image: "/placeholder.svg?height=200&width=200",
-    description: "Crisp, colorful bell peppers in red, yellow, and green",
-    category: "Vegetables",
+    description: "Large covered litter box with odor control and easy cleaning",
+    category: "Litter & Cleanup",
     inStock: true,
-    sku: "PEP-004"
+    sku: "PEP-004",
   },
   {
     id: 5,
-    name: "Organic Broccoli",
-    price: 3.99,
+    name: "cat nip",
+    price: 8.99,
     image: "/placeholder.svg?height=200&width=200",
-    description: "Fresh, organic broccoli crowns rich in vitamins",
-    category: "Vegetables",
+    description: "Premium organic catnip to stimulate and entertain your cat",
+    category: "Treats & Supplements",
     inStock: true,
-    sku: "BRO-005"
+    sku: "BRO-005",
   },
   {
     id: 6,
-    name: "Sweet Potatoes",
-    price: 3.79,
+    name: "dog food",
+    price: 42.99,
     image: "/placeholder.svg?height=200&width=200",
-    description: "Naturally sweet potatoes, perfect for roasting",
-    category: "Root Vegetables",
+    description: "High-quality dry dog food with real chicken and vegetables",
+    category: "Food",
     inStock: true,
-    sku: "SWE-006"
+    sku: "SWE-006",
   },
   {
     id: 7,
-    name: "Organic Lettuce",
-    price: 2.49,
+    name: "kong dog toy",
+    price: 12.99,
     image: "/placeholder.svg?height=200&width=200",
-    description: "Crisp romaine lettuce, ideal for salads and wraps",
-    category: "Leafy Greens",
+    description:
+      "Durable rubber Kong toy for interactive play and treat dispensing",
+    category: "Toys",
     inStock: true,
-    sku: "LET-007"
+    sku: "LET-007",
   },
   {
     id: 8,
-    name: "Fresh Cucumbers",
-    price: 2.79,
+    name: "brush",
+    price: 18.99,
     image: "/placeholder.svg?height=200&width=200",
-    description: "Cool, refreshing cucumbers perfect for snacking",
-    category: "Vegetables",
+    description:
+      "Professional pet grooming brush for reducing shedding and matting",
+    category: "Grooming",
     inStock: true,
-    sku: "CUC-008"
+    sku: "CUC-008",
   },
-]
-
+  {
+    id: 9,
+    name: "fish aquarium",
+    price: 89.99,
+    image: "/placeholder.svg?height=200&width=200",
+    description:
+      "Complete 10-gallon fish aquarium starter kit with filter and heater",
+    category: "Aquarium",
+    inStock: true,
+    sku: "AQU-009",
+  },
+  {
+    id: 10,
+    name: "hamster ball",
+    price: 14.99,
+    image: "/placeholder.svg?height=200&width=200",
+    description:
+      "Clear exercise ball for hamsters and small pets to explore safely",
+    category: "Small Pet Accessories",
+    inStock: true,
+    sku: "HAM-010",
+  },
+];

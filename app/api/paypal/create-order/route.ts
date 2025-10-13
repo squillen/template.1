@@ -50,8 +50,8 @@ export async function POST(request: Request) {
           },
           items: items || [
             {
-              name: 'Organic Vegetables',
-              description: 'Fresh organic vegetables',
+              name: 'Sustainable Pet Products',
+              description: 'A selection of eco-friendly pet supplies',
               quantity: '1',
               unit_amount: {
                 currency_code: 'USD',
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
         },
       ],
       application_context: {
-        brand_name: 'VeggieFresh',
+        brand_name: 'Petsmania',
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
         return_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/checkout/success`,

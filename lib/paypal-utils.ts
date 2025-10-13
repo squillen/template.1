@@ -1,5 +1,5 @@
 /**
- * PayPal API utility functions for vegetable-ecommerce
+ * PayPal API utility functions for pet-supply-ecommerce
  */
 
 // Types
@@ -75,7 +75,7 @@ export async function getOrderDetails(orderId: string) {
  * Updates an existing order before payment
  * @param orderId PayPal order ID
  * @param operations Array of PATCH operations in JSON Patch format
- * 
+ *
  * Example operations:
  * [
  *   {
@@ -225,8 +225,8 @@ export async function getAuthorizationDetails(authorizationId: string) {
  * Captures an authorized payment
  */
 export async function captureAuthorization(
-  authorizationId: string, 
-  amount?: string, 
+  authorizationId: string,
+  amount?: string,
   finalCapture: boolean = true,
   invoiceId?: string
 ) {

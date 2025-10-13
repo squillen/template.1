@@ -9,10 +9,9 @@ export default function HomePage() {
       <main className="container mx-auto px-4 py-8">
         <section className="mb-12">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-4">Fresh Organic Vegetables</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-4">Sustainable Pet Products</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Farm-fresh, organic vegetables delivered straight to your door. Sustainably grown with care for you and
-              the environment.
+              Discover our range of eco-friendly and high-quality products designed to keep your pets happy and healthy.
             </p>
           </div>
         </section>
