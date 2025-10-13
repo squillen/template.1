@@ -4,6 +4,8 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import "./globals.css"
 import { CartProvider } from "@/context/cart-context"
+import { PayPalScript } from "@/components/paypal-script"
+import { PayPalInjectButtons } from "@/components/paypal-inject-buttons"
 
 export const metadata: Metadata = {
   title: "VeggieFresh - Organic Vegetables",
@@ -28,9 +30,15 @@ html {
         `}</style>
       </head>
       <body>
+        {/* PayPal Cart Script - Loads PayPal embedded cart SDK */}
+        <PayPalScript />
+        
         <CartProvider>
           {children}
         </CartProvider>
+        
+        {/* PayPal Button Injection - Injects Add to Cart and View Cart buttons */}
+        <PayPalInjectButtons />
       </body>
     </html>
   )
