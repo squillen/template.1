@@ -21,17 +21,15 @@ const defaultButtonIds = {
   8: "8H2XH6LR4HV4C", // Fresh Cucumbers
 };
 
-const dynamicButtonIds =
-  process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS &&
-  JSON.parse(process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS)?.reduce(
-    (acc: Record<number, string>, buttonId: string) => {
-      console.log('buttonId :::::>> ', buttonId);
-      acc[Object.keys(acc).length + 1] = buttonId;
+console.log('process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS :::::::>> ', process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS);
+const dynamicButtonIds = process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS?.split(
+  ","
+)?.reduce((acc: Record<number, string>, buttonId: string) => {
+  console.log("buttonId :::::>> ", buttonId);
+  acc[Object.keys(acc).length + 1] = buttonId;
 
-      return acc;
-    },
-    {}
-  );
+  return acc;
+}, {});
 
 console.log("dynamicButtonIds :::::>> ", dynamicButtonIds);
 
