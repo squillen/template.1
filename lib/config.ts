@@ -10,28 +10,48 @@ export interface Product {
   sku?: string
 }
 
+const defaultButtonIds = {
+  1: "HBV9P6CL2FPJ8", // Organic Tomatoes
+  2: "QF4JAPCKSZ972", // Fresh Carrots
+  3: "A9ZZ7Y9AENR76", // Organic Spinach
+  4: "JP46X5AZGAB7A", // Bell Peppers
+  5: "RQNZ5GRDPRUY2", // Organic Broccoli
+  6: "YYZSAERVFLBDC", // Sweet Potatoes
+  7: "PPFCRBR5W59RG", // Organic Lettuce
+  8: "8H2XH6LR4HV4C", // Fresh Cucumbers
+};
+
+const dynamicButtonIds =
+  process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS &&
+  JSON.parse(process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS)?.reduce(
+    (acc: Record<number, string>, buttonId: string) => {
+      console.log('buttonId :::::>> ', buttonId);
+      acc[Object.keys(acc).length + 1] = buttonId;
+
+      return acc;
+    },
+    {}
+  );
+
+console.log("dynamicButtonIds :::::>> ", dynamicButtonIds);
+
+const buttonIds = dynamicButtonIds || defaultButtonIds;
+
+console.log("buttonIds :::::::>> ", buttonIds);
+
 // Store configuration
 export const storeConfig = {
   name: "VeggieFresh",
   tagline: "Fresh Organic Vegetables",
-  description: "Farm-fresh, organic vegetables delivered straight to your door. Sustainably grown with care for you and the environment.",
+  description:
+    "Farm-fresh, organic vegetables delivered straight to your door. Sustainably grown with care for you and the environment.",
   currency: "USD",
   currencySymbol: "$",
   paypal: {
-    merchantId: "PRBQR9MAHMDL6", // Your PayPal merchant ID
-    // Each product needs a unique PayPal button ID from PayPal Business account
-    buttonIds: {
-      1: "HBV9P6CL2FPJ8",  // Organic Tomatoes
-      2: "QF4JAPCKSZ972",  // Fresh Carrots
-      3: "A9ZZ7Y9AENR76",  // Organic Spinach
-      4: "JP46X5AZGAB7A",  // Bell Peppers
-      5: "RQNZ5GRDPRUY2",  // Organic Broccoli
-      6: "YYZSAERVFLBDC",  // Sweet Potatoes
-      7: "PPFCRBR5W59RG",  // Organic Lettuce
-      8: "8H2XH6LR4HV4C",  // Fresh Cucumbers
-    }
-  }
-}
+    merchantId: process.env.PAYPAL_MERCHANT_ID || "PRBQR9MAHMDL6",
+    buttonIds,
+  },
+};
 
 // Default products data
 export const products: Product[] = [
