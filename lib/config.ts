@@ -21,6 +21,7 @@ const defaultButtonIds = {
   8: "8H2XH6LR4HV4C", // Fresh Cucumbers
 };
 
+console.log('process.env :::::::>> ', process.env);
 console.log('process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS :::::::>> ', process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS);
 const dynamicButtonIds = process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS?.split(
   ","
@@ -46,7 +47,11 @@ export const storeConfig = {
   currency: "USD",
   currencySymbol: "$",
   paypal: {
-    merchantId: process.env.PAYPAL_MERCHANT_ID || "PRBQR9MAHMDL6",
+    merchantId:
+      process.env.NEXT_PUBLIC_PAYPAL_MERCHANT_ID &&
+      process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS
+        ? process.env.NEXT_PUBLIC_PAYPAL_MERCHANT_ID
+        : "PRBQR9MAHMDL6",
     buttonIds,
   },
 };
