@@ -32,20 +32,20 @@ async function generateAccessToken() {
 export async function PATCH(request: NextRequest) {
   try {
     const { orderId, operations } = await request.json();
-    
+
     if (!orderId) {
       return NextResponse.json({ error: 'Order ID is required' }, { status: 400 });
     }
-    
+
     if (!operations || !Array.isArray(operations)) {
       return NextResponse.json({ error: 'Patch operations are required as an array' }, { status: 400 });
     }
-    
+
     try {
       const accessToken = await generateAccessToken();
-      
+
       console.log('Sending PATCH with operations:', JSON.stringify(operations, null, 2));
-      
+
       // Update order using PATCH with JSON Patch format
       const response = await fetch(`${PAYPAL_API_URL}/v2/checkout/orders/${orderId}`, {
         method: 'PATCH',
@@ -59,7 +59,7 @@ export async function PATCH(request: NextRequest) {
       if (!response.ok) {
         const errorText = await response.text();
         console.error('PayPal API error:', errorText);
-        return NextResponse.json({ 
+        return NextResponse.json({
           error: 'Failed to update order',
           details: errorText
         }, { status: response.status });
@@ -74,22 +74,22 @@ export async function PATCH(request: NextRequest) {
           'Authorization': `Bearer ${accessToken}`,
         },
       });
-      
+
       if (!orderResponse.ok) {
-        return NextResponse.json({ 
-          success: true, 
+        return NextResponse.json({
+          success: true,
           message: 'Order updated successfully, but could not retrieve updated details'
         });
       }
-      
+
       const updatedOrder = await orderResponse.json();
-      
+
       return NextResponse.json({
         success: true,
         message: 'Order updated successfully',
         order: updatedOrder
       });
-      
+
     } catch (error) {
       console.error('Error updating order:', error);
       return NextResponse.json({ error: 'Failed to update order' }, { status: 500 });

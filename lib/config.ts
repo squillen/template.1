@@ -21,18 +21,13 @@ const defaultButtonIds = {
   8: "8H2XH6LR4HV4C", // Product 8
 };
 
-console.log('process.env :::::::>> ', process.env);
-console.log('process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS :::::::>> ', process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS);
 const dynamicButtonIds = process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS?.split(
   ","
 )?.reduce((acc: Record<number, string>, buttonId: string) => {
-  console.log("buttonId :::::>> ", buttonId);
   acc[Object.keys(acc).length + 1] = buttonId;
 
   return acc;
 }, {});
-
-console.log("dynamicButtonIds :::::>> ", dynamicButtonIds);
 
 const buttonIds = dynamicButtonIds || defaultButtonIds;
 
