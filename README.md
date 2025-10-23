@@ -1,1 +1,1 @@
-# vegetable-ecommerce
+# ecommerce-template

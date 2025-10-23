@@ -7,42 +7,42 @@ const PAYPAL_BUTTONS_CONFIG = [
   {
     productId: 1,
     paypalButtonId: "ZUTVT4JEXUKUG",
-    productName: "Tomatoes"
+    productName: "Product 1"
   },
   {
     productId: 2,
     paypalButtonId: "QF4JAPCKSZ972",
-    productName: "Carrots"
+    productName: "Product 2"
   },
   {
     productId: 3,
     paypalButtonId: "A9ZZ7Y9AENR76",
-    productName: "Spinach"
+    productName: "Product 3"
   },
   {
     productId: 4,
     paypalButtonId: "JP46X5AZGAB7A",
-    productName: "Bell Peppers"
+    productName: "Product 4"
   },
   {
     productId: 5,
     paypalButtonId: "TUDF22T77PAYE",
-    productName: "Organic Broccoli"
+    productName: "Product 5"
   },
   {
     productId: 6,
     paypalButtonId: "YYZSAERVFLBDC",
-    productName: "Sweet Potatoes"
+    productName: "Product 6"
   },
   {
     productId: 7,
     paypalButtonId: "PPFCRBR5W59RG",
-    productName: "Organic Lettuce"
+    productName: "Product 7"
   },
   {
     productId: 8,
     paypalButtonId: "8H2XH6LR4HV4C",
-    productName: "Fresh Cucumbers"
+    productName: "Product 8"
   }
   // Add more products here as you get their PayPal button IDs
 ]
@@ -50,52 +50,64 @@ const PAYPAL_BUTTONS_CONFIG = [
 export function PayPalButtons() {
   useEffect(() => {
     const injectPayPalButtons = () => {
-      if (typeof window !== 'undefined' && (window as any).cartPaypal) {
-        console.log('PayPal loaded, injecting buttons...')
-        
+      if (typeof window !== "undefined" && (window as any).cartPaypal) {
+        console.log("PayPal loaded, injecting buttons...");
+
         // Inject View Cart button
-        const viewCartContainer = document.getElementById('paypal-view-cart-container')
+        const viewCartContainer = document.getElementById(
+          "paypal-view-cart-container"
+        );
         if (viewCartContainer) {
-          viewCartContainer.innerHTML = '<paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>'
-          ;(window as any).cartPaypal.Cart({ id: "pp-view-cart" })
-          console.log('View Cart button injected')
+          viewCartContainer.innerHTML =
+            '<paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>';
+          (window as any).cartPaypal.Cart({ id: "pp-view-cart" });
+          console.log("View Cart button injected");
         }
 
         // Inject Add to Cart buttons for all products
-        PAYPAL_BUTTONS_CONFIG.forEach(({ productId, paypalButtonId, productName }) => {
-          const container = document.getElementById(`paypal-add-to-cart-${productId}`)
-          if (container) {
-            container.innerHTML = `<paypal-add-to-cart-button data-id="${paypalButtonId}"></paypal-add-to-cart-button>`
-            ;(window as any).cartPaypal.AddToCart({ id: paypalButtonId })
+        PAYPAL_BUTTONS_CONFIG.forEach(
+          ({ productId, paypalButtonId, productName }) => {
+            const container = document.getElementById(
+              `paypal-add-to-cart-${productId}`
+            );
+            if (container) {
+              container.innerHTML = `<paypal-add-to-cart-button data-id="${paypalButtonId}"></paypal-add-to-cart-button>`;
+              (window as any).cartPaypal.AddToCart({ id: paypalButtonId });
+            }
           }
-        })
-        
+        );
+
         // Debug: Check what was actually injected
         setTimeout(() => {
           PAYPAL_BUTTONS_CONFIG.forEach(({ productId, productName }) => {
-            const container = document.getElementById(`paypal-add-to-cart-${productId}`)
+            const container = document.getElementById(
+              `paypal-add-to-cart-${productId}`
+            );
             if (container) {
-              console.log(`${productName} container HTML:`, container.innerHTML)
+              console.log(
+                `${productName} container HTML:`,
+                container.innerHTML
+              );
             }
-          })
-        }, 1000)
+          });
+        }, 1000);
       }
-    }
+    };
 
     // Check if PayPal is loaded, if not wait for it
-    if (typeof window !== 'undefined' && (window as any).cartPaypal) {
-      injectPayPalButtons()
+    if (typeof window !== "undefined" && (window as any).cartPaypal) {
+      injectPayPalButtons();
     } else {
-      console.log('Waiting for PayPal to load...')
+      console.log("Waiting for PayPal to load...");
       const checkPayPal = setInterval(() => {
-        if (typeof window !== 'undefined' && (window as any).cartPaypal) {
-          clearInterval(checkPayPal)
-          console.log('PayPal loaded, injecting buttons...')
-          injectPayPalButtons()
+        if (typeof window !== "undefined" && (window as any).cartPaypal) {
+          clearInterval(checkPayPal);
+          console.log("PayPal loaded, injecting buttons...");
+          injectPayPalButtons();
         }
-      }, 100)
+      }, 100);
     }
-  }, [])
+  }, []);
 
-  return null
-} 
+  return null;
+}

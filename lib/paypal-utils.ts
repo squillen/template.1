@@ -1,5 +1,5 @@
 /**
- * PayPal API utility functions for vegetable-ecommerce
+ * PayPal API utility functions for ecommerce-template
  */
 
 // Types
@@ -75,7 +75,7 @@ export async function getOrderDetails(orderId: string) {
  * Updates an existing order before payment
  * @param orderId PayPal order ID
  * @param operations Array of PATCH operations in JSON Patch format
- * 
+ *
  * Example operations:
  * [
  *   {
@@ -225,32 +225,32 @@ export async function getAuthorizationDetails(authorizationId: string) {
  * Captures an authorized payment
  */
 export async function captureAuthorization(
-  authorizationId: string, 
-  amount?: string, 
+  authorizationId: string,
+  amount?: string,
   finalCapture: boolean = true,
   invoiceId?: string
 ) {
   try {
-    const response = await fetch('/api/paypal/capture-authorization', {
-      method: 'POST',
+    const response = await fetch("/api/paypal/capture-authorization", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         authorizationId,
         amount,
         finalCapture,
-        invoiceId
-      })
+        invoiceId,
+      }),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to capture authorized payment');
+      throw new Error("Failed to capture authorized payment");
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Error capturing authorized payment:', error);
+    console.error("Error capturing authorized payment:", error);
     throw error;
   }
 }

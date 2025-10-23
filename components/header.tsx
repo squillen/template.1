@@ -7,9 +7,9 @@ export function Header() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">V</span>
+              <span className="text-primary-foreground font-bold text-sm">Y</span>
             </div>
-            <h1 className="text-xl font-bold text-foreground">VeggieFresh</h1>
+            <h1 className="text-xl font-bold text-foreground">Your Company Name</h1>
           </div>
 
           {/* PayPal View Cart Button - PayPal will inject the cart button here */}

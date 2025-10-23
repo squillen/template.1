@@ -8,8 +8,8 @@ import { PayPalScript } from "@/components/paypal-script"
 import { PayPalInjectButtons } from "@/components/paypal-inject-buttons"
 
 export const metadata: Metadata = {
-  title: "VeggieFresh - Organic Vegetables",
-  description: "Fresh organic vegetables delivered to your door",
+  title: "Your Company Name - Your Products",
+  description: "Your company description",
   generator: "v0.app",
 }
 
@@ -32,14 +32,12 @@ html {
       <body>
         {/* PayPal Cart Script - Loads PayPal embedded cart SDK */}
         <PayPalScript />
-        
-        <CartProvider>
-          {children}
-        </CartProvider>
-        
+
+        <CartProvider>{children}</CartProvider>
+
         {/* PayPal Button Injection - Injects Add to Cart and View Cart buttons */}
         <PayPalInjectButtons />
       </body>
     </html>
-  )
+  );
 }

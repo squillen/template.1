@@ -53,7 +53,7 @@ export function ShoppingCart() {
                   <ShoppingBag className="w-16 h-16 text-muted-foreground/50" />
                   <div className="text-center">
                     <p className="text-muted-foreground font-medium">Your cart is empty</p>
-                    <p className="text-sm text-muted-foreground">Add some fresh vegetables to get started!</p>
+                    <p className="text-sm text-muted-foreground">Add some products to get started!</p>
                   </div>
                 </div>
               ) : (

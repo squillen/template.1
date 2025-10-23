@@ -33,7 +33,7 @@ export function OrderConfirmation({ transactionId, onClose }: OrderConfirmationP
               </div>
               <div>
                 <p className="font-medium text-sm">Order Processing</p>
-                <p className="text-xs text-muted-foreground">We're preparing your fresh vegetables</p>
+                <p className="text-xs text-muted-foreground">We're preparing your items</p>
               </div>
             </div>
 
