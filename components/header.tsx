@@ -6,11 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
-interface HeaderProps {
-  children?: React.ReactNode
-}
-
-export function Header({ children }: HeaderProps) {
+export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleNavClick = () => {
@@ -19,8 +15,8 @@ export function Header({ children }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <div className=" px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-evenly">
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="text-2xl font-bold text-foreground hover:text-secondary transition-colors">

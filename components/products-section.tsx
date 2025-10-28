@@ -1,14 +1,15 @@
 "use client"
 
 import { ProductCard } from "@/components/product-card"
-import { dynamicButtonIds } from "@/lib/config";
+import { productButtonIds } from "@/lib/config";
 
 export function ProductsSection() {
+  console.log('productButtonIds ::::::>> ', productButtonIds);
   const productButtonIdsArray =
-    dynamicButtonIds && Object.values(dynamicButtonIds);
+    productButtonIds && Object.values(productButtonIds);
   console.log("productButtonIdsArray :::::>> ", productButtonIdsArray);
   return productButtonIdsArray?.length ? (
-    <section>
+    <section className="p-[2rem]">
       <h2 className="text-2xl font-bold text-foreground mb-6">Our Products</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {productButtonIdsArray.map((productId) => (
@@ -17,7 +18,7 @@ export function ProductsSection() {
       </div>
     </section>
   ) : (
-    <section className="text-2xl font-bold text-foreground mb-6 display:flex justify-content:center">
+    <section className="text-2xl h-[80vh] font-bold text-foreground mb-6 flex justify-center p-[2rem] content-center items-center">
       No products yet
     </section>
   );

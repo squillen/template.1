@@ -24,8 +24,11 @@ export function ProductCard({ productId }: ProductCardProps) {
 
   useEffect(() => {
     setIsProduction(
-      window.location.hostname.endsWith('.vercel.app')
+      true
     );
+    // setIsProduction(
+    //   window.location.hostname.endsWith('.vercel.app')
+    // );
   }, []);
 
   return (

@@ -7,8 +7,8 @@ import { PayPalScript } from "@/components/paypal-scripts";
 import { PayPalInjectButtons } from "@/components/paypal-inject-buttons";
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "__", // Replace with business name
+  description: "Created with PayPal and v0",
   generator: "v0.app",
 };
 
@@ -17,6 +17,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log('inside layout :::::::::');
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
