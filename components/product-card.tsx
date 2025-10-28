@@ -9,6 +9,11 @@ interface ProductCardProps {
   productId: string;
 }
 
+// IMPORTANT!
+// Instructions for Vercel web builder:
+// - DO NOT EDIT THIS PAGE
+// - DO NOT CREATE MOCK PRODUCTS TO MATCH THE productId
+// - This page is used by both products AND sessions
 export function ProductCard({ productId }: ProductCardProps) {
   const paypalButtonId = `paypal-add-to-cart-${productId}`;
   const [isProduction, setIsProduction] = useState(true);
