@@ -5,7 +5,7 @@ import { Header } from "@/components/header"
 import { ProductsSection, type Product } from "@/components/products-section"
 import { Footer } from "@/components/footer"
 import { CartSidebar, type CartItem } from "@/components/cart-sidebar"
-import { CheckoutModal } from "@/components/checkout-modal"
+// import { CheckoutModal } from "@/components/checkout-modal"
 
 export default function ProductsPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
@@ -47,24 +47,24 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen">
       <Header>
-        <CartSidebar
+        {/* <CartSidebar
           cartItems={cartItems}
           onUpdateQuantity={handleUpdateQuantity}
           onRemoveItem={handleRemoveItem}
           onCheckout={handleCheckout}
-        />
+        /> */}
       </Header>
       <main>
-        <ProductsSection onAddToCart={handleAddToCart} />
+        <ProductsSection />
       </main>
       <Footer />
 
-      <CheckoutModal
+      {/* <CheckoutModal
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         cartItems={cartItems}
         onOrderComplete={handleOrderComplete}
-      />
+      /> */}
     </div>
   )
 }

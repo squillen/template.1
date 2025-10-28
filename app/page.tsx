@@ -5,14 +5,14 @@ import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { Footer } from "@/components/footer"
 import { CartSidebar, type CartItem } from "@/components/cart-sidebar"
-import { CheckoutModal } from "@/components/checkout-modal"
-import type { Product } from "@/components/products-section"
+// import { CheckoutModal } from "@/components/checkout-modal"
+// import type { Product } from "@/components/products-section"
 
 export default function HomePage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product) => {
     setCartItems((prev) => {
       const existingItem = prev.find((item) => item.id === product.id)
       if (existingItem) {
@@ -48,24 +48,24 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <Header>
-        <CartSidebar
+        {/* <CartSidebar
           cartItems={cartItems}
           onUpdateQuantity={handleUpdateQuantity}
           onRemoveItem={handleRemoveItem}
           onCheckout={handleCheckout}
-        />
+        /> */}
       </Header>
       <main>
         <HeroSection />
       </main>
       <Footer />
 
-      <CheckoutModal
+      {/* <CheckoutModal
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         cartItems={cartItems}
         onOrderComplete={handleOrderComplete}
-      />
+      /> */}
     </div>
   )
 }

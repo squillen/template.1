@@ -29,7 +29,7 @@ export function Header({ children }: HeaderProps) {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="sm:hidden md:flex items-center space-x-8">
             <Link href="/" className="text-foreground hover:text-secondary transition-colors">
               Home
             </Link>
@@ -54,14 +54,17 @@ export function Header({ children }: HeaderProps) {
           </nav>
 
           {/* CTA Button and Cart */}
+          <div id="paypal-view-cart-container"></div>
           <div className="hidden md:flex items-center gap-4">
-            {children}
-            <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">Get Started</Button>
+            {/* {children} */}
+            <div id="paypal-view-cart-container"></div>
+            {/* <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">Get Started</Button> */}
           </div>
 
           {/* Mobile Menu Button and Cart */}
           <div className="md:hidden flex items-center gap-2">
-            {children}
+            {/* {children} */}
+            <div id="paypal-view-cart-container"></div>
             <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
