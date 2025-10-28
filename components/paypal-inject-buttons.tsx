@@ -26,11 +26,6 @@ export function PayPalInjectButtons() {
           }
 
           // Inject Add to Cart buttons for all products using configuration
-          console.log(
-            "storeConfig.paypal.productButtonIds ::::::>> ",
-            storeConfig.paypal.productButtonIds
-          );
-
           productButtonIds.forEach((productButtonId) => {
             const container = document.getElementById(
               `paypal-add-to-cart-${productButtonId}`
@@ -45,10 +40,6 @@ export function PayPalInjectButtons() {
             }
           });
 
-          console.log(
-            "storeConfig.paypal.serviceButtonIds ::::::>> ",
-            storeConfig.paypal.serviceButtonIds
-          );
           serviceButtonIds.forEach((serviceButtonId) => {
             const container = document.getElementById(
               `paypal-add-to-cart-${serviceButtonId}`

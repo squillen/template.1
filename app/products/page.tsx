@@ -7,7 +7,7 @@ export default function ProductsPage() {
     <div className="min-h-screen">
       <Header />
       <main>
-        <ProductsSection />
+        <ProductsSection type="products" />
       </main>
       <Footer />
     </div>
