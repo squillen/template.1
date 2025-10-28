@@ -1,51 +1,85 @@
 "use client"
 
-import Image from "next/image"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-
-interface Product {
-  id: number
-  name: string
-  price: number
-  image: string
-  description: string
-}
+import Link from "next/link";
 
 interface ProductCardProps {
-  productId: string
+  productId: string;
 }
 
 export function ProductCard({ productId }: ProductCardProps) {
-  // Create unique PayPal button ID for each product
-  const paypalButtonId = `paypal-add-to-cart-${productId}`
+  const paypalButtonId = `paypal-add-to-cart-${productId}`;
   const [isProduction, setIsProduction] = useState(true);
 
   useEffect(() => {
-    setIsProduction(
-      true
-    );
-    // setIsProduction(
-    //   window.location.hostname.endsWith('.vercel.app')
-    // );
+    setIsProduction(window.location.hostname.endsWith(".vercel.app"));
   }, []);
 
   return (
-    <Card className="bg-card border-border hover:shadow-lg transition-shadow">
+    <Card className="bg-card border-border hover:shadow-lg transition-shadow relative">
       <CardFooter className="p-4 pt-0">
         {/* PayPal Add to Cart Button in production, custom button in development */}
         {isProduction ? (
           <div id={paypalButtonId} className="w-full"></div>
         ) : (
-          <Button
-            className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium"
-            onClick={() => console.log(`Add to cart: ${productId}`)}
-          >
-            Add to cart
-          </Button>
+          <div className="w-full space-y-3">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <div className="flex items-start space-x-2">
+                <div className="flex-shrink-0">
+                  <svg
+                    className="w-4 h-4 text-blue-500 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs text-blue-700 font-medium">
+                    Development Mode
+                  </p>
+                  <p className="text-xs text-blue-600">
+                    More details will be available once your site is published!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Button
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium"
+              onClick={() => console.log(`Add to cart: ${productId}`)}
+            >
+              Add to cart
+            </Button>
+          </div>
         )}
       </CardFooter>
+      <div className="p-4 pt-0 absolute bottom-px">
+        <Link
+          className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200 hover:underline"
+          href={`/products/${productId}`}
+        >
+          See more
+          <svg
+            className="w-3 h-3 ml-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </Link>
+      </div>
     </Card>
   );
 }

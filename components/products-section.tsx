@@ -4,15 +4,11 @@ import { ProductCard } from "@/components/product-card"
 import { productButtonIds } from "@/lib/config";
 
 export function ProductsSection() {
-  console.log('productButtonIds ::::::>> ', productButtonIds);
-  const productButtonIdsArray =
-    productButtonIds && Object.values(productButtonIds);
-  console.log("productButtonIdsArray :::::>> ", productButtonIdsArray);
-  return productButtonIdsArray?.length ? (
+  return productButtonIds?.length ? (
     <section className="p-[2rem]">
       <h2 className="text-2xl font-bold text-foreground mb-6">Our Products</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {productButtonIdsArray.map((productId) => (
+        {productButtonIds.map((productId) => (
           <ProductCard key={productId} productId={productId} />
         ))}
       </div>
