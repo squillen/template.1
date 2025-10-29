@@ -1,6 +1,6 @@
 "use client"
 import { Header } from "@/components/header"
-import { ProductGrid } from "@/components/product-grid"
+import { ServicesGrid } from "@/components/services-grid";
 import Image from "next/image";
 
 export default function HomePage() {
@@ -32,7 +32,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <ProductGrid />
+        <ServicesGrid />
       </main>
     </div>
   );
