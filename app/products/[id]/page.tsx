@@ -29,12 +29,14 @@ export default function ProductPage() {
               <ProductionProductOrServiceCard
                 paypalButtonId={paypalButtonId}
                 buttonId={buttonId}
+                type={"products"}
               />
             ) : (
               <div className="p-4 pt-0">
                 <PreviewProductOrServiceCard
                   buttonId={buttonId}
                   productIndex={0}
+                  type="products"
                 />
               </div>
             )}

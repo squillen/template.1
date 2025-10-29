@@ -8,7 +8,7 @@ import { Footer } from "react-day-picker";
 import { ProductionProductOrServiceCard } from "@/components/ui/production-product-or-service-card";
 import { PreviewProductOrServiceCard } from "@/components/ui/preview-product-or-service-card";
 
-export default function ProductPage() {
+export default function ServicePage() {
   const params = useParams();
   const buttonId = params.id as string;
   const paypalButtonId = `paypal-add-to-cart-${buttonId}`;
@@ -29,12 +29,14 @@ export default function ProductPage() {
               <ProductionProductOrServiceCard
                 paypalButtonId={paypalButtonId}
                 buttonId={buttonId}
+                type={'services'}
               />
             ) : (
               <div className="p-4 pt-0">
                 <PreviewProductOrServiceCard
                   buttonId={buttonId}
                   productIndex={0}
+                  type="services"
                 />
               </div>
             )}

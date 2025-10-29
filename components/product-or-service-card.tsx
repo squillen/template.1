@@ -27,12 +27,14 @@ export function ProductOrServiceCard({ buttonId, productIndex, type }: ProductOr
         <ProductionProductOrServiceCard
           paypalButtonId={paypalButtonId}
           buttonId={buttonId}
+          type={type}
         />
       ) : (
         <div className="p-4 pt-0">
           <PreviewProductOrServiceCard
             buttonId={buttonId}
             productIndex={productIndex}
+            type={type}
           />
         </div>
       )}
