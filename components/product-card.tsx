@@ -21,17 +21,20 @@ export function ProductCard({ productId, productIndex }: ProductCardProps) {
 
   return (
     <Card className="bg-card border-border hover:shadow-lg transition-shadow relative">
-      <CardFooter className="p-4 pt-0">
-        {/* PayPal Add to Cart Button in production, custom button in development */}
-        {isProduction ? (
-          <ProductionProductCard paypalButtonId={paypalButtonId} />
-        ) : (
+      {/* PayPal Add to Cart Button in production, custom button in development */}
+      {isProduction ? (
+        <ProductionProductCard
+          paypalButtonId={paypalButtonId}
+          productId={productId}
+        />
+      ) : (
+        <div className="p-4 pt-0">
           <PreviewProductCard
             productId={productId}
             productIndex={productIndex}
           />
-        )}
-      </CardFooter>
+        </div>
+      )}
       <div className="p-4 pt-0 absolute bottom-px">
         <Link
           className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200 hover:underline"

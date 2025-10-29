@@ -20,7 +20,7 @@ export function HeroSection() {
             <div className="relative h-64 md:h-80 lg:h-96 w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
               <Image
-                src="/placeholder.jpg" // Update with relevant image
+                src={"/placeholder.svg"} // IMPORTANT: Update with image that is relevant to the given business
                 alt="Professional business solutions showcase"
                 fill
                 className="object-cover"
