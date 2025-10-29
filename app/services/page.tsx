@@ -7,7 +7,7 @@ export default function ServicesPage() {
     <div className="min-h-screen">
       <Header />
       <main>
-        <ProductsSection />
+        <ProductsSection type='services' />
       </main>
       <Footer />
     </div>

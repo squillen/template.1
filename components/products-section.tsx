@@ -3,7 +3,7 @@
 import { ProductCard } from "@/components/product-card"
 import { productButtonIds, serviceButtonIds } from "@/lib/config";
 
-export function ProductsSection({ type = "services" }) {
+export function ProductsSection({ type = "products" }: { type?: 'products' | 'services' }) {
   const { headerText, noInventoryText, productIds } = {
     services: {
       headerText: "Our Services",
