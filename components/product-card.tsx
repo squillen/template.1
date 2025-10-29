@@ -1,10 +1,10 @@
 "use client"
 
 import { Card, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { ProductionProductCard } from "./ui/production-product-card";
+import { PreviewProductCard } from "./ui/preview-product-card";
 
 interface ProductCardProps {
   productId: string;
@@ -24,39 +24,12 @@ export function ProductCard({ productId, productIndex }: ProductCardProps) {
       <CardFooter className="p-4 pt-0">
         {/* PayPal Add to Cart Button in production, custom button in development */}
         {isProduction ? (
-          <div id={paypalButtonId} className="w-full"></div>
+          <ProductionProductCard paypalButtonId={paypalButtonId} />
         ) : (
-          <div className="w-full space-y-3">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <div className="flex items-start justify-center space-x-2">
-                <div>
-                  <div className="aspect-square relative mb-4 overflow-hidden rounded-md">
-                    <Image
-                      src={"/placeholder.svg"}
-                      alt={`Product ${productId}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <h3 className="font-semibold text-card-foreground mb-2">
-                    Product {productIndex + 1}
-                  </h3>
-                  <p className="text-xs text-blue-700 font-medium">
-                    This section is in development mode
-                  </p>
-                  <p className="text-xs text-blue-600">
-                    More information will show when published.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <Button
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium"
-              onClick={() => console.log(`Add to cart: ${productId}`)}
-            >
-              Add to cart
-            </Button>
-          </div>
+          <PreviewProductCard
+            productId={productId}
+            productIndex={productIndex}
+          />
         )}
       </CardFooter>
       <div className="p-4 pt-0 absolute bottom-px">

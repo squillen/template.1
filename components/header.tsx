@@ -3,16 +3,11 @@
 import type React from "react"
 import { useState } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { productButtonIds, serviceButtonIds } from "@/lib/config";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleNavClick = () => {
-    setIsMenuOpen(false);
-  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 overflow-hidden">
