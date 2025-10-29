@@ -1,35 +1,36 @@
 "use client"
 
-import { ProductCard } from "@/components/product-card"
+import { ProductOrServiceCard } from "@/components/product-or-service-card"
 import { productButtonIds, serviceButtonIds } from "@/lib/config";
 
-export function ProductsSection({ type = "products" }: { type?: 'products' | 'services' }) {
-  const { headerText, noInventoryText, productIds } = {
+export function ProductsOrServicesSection({ type = "products" }: { type?: 'products' | 'services' }) {
+  const { headerText, noInventoryText, buttonIds } = {
     services: {
       headerText: "Our Services",
       noInventoryText: "No services yet",
-      productIds: serviceButtonIds,
+      buttonIds: serviceButtonIds,
     },
     products: {
       headerText: "Our Products",
       noInventoryText: "No products yet",
-      productIds: productButtonIds,
+      buttonIds: productButtonIds,
     },
   }[type] as {
     headerText: string;
     noInventoryText: string;
-    productIds: string[];
+    buttonIds: string[];
   };
 
-  return productIds?.length ? (
+  return buttonIds?.length ? (
     <section className="p-[2rem]">
       <h2 className="text-2xl font-bold text-foreground mb-6">{headerText}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {productIds.map((productId, productIndex) => (
-          <ProductCard
-            key={productId}
-            productId={productId}
+        {buttonIds.map((buttonId, productIndex) => (
+          <ProductOrServiceCard
+            key={buttonId}
+            buttonId={buttonId}
             productIndex={productIndex}
+            type={type}
           />
         ))}
       </div>

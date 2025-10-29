@@ -1,13 +1,13 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { ProductsSection } from "@/components/products-section"
+import { ProductsOrServicesSection } from "@/components/products-or-services-section";
 
 export default function ServicesPage() {
   return (
     <div className="min-h-screen">
       <Header />
       <main>
-        <ProductsSection type='services' />
+        <ProductsOrServicesSection type='services' />
       </main>
       <Footer />
     </div>

@@ -1,7 +1,7 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { Footer } from "@/components/footer"
-import { ProductsSection } from "@/components/products-section"
+import { ProductsOrServicesSection } from "@/components/products-or-services-section";
 
 export default function HomePage() {
   return (
@@ -9,7 +9,7 @@ export default function HomePage() {
       <Header />
       <main>
         <HeroSection />
-        <ProductsSection />
+        <ProductsOrServicesSection />
       </main>
       <Footer />
     </div>

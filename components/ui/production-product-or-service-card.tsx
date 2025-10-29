@@ -1,18 +1,18 @@
 import Image from "next/image";
 
-export function ProductionProductCard({
+export function ProductionProductOrServiceCard({
   paypalButtonId,
-  productId,
+  buttonId,
 }: {
   paypalButtonId: string;
-  productId: string;
+  buttonId: string;
 }) {
   return (
     <div className="p-[1rem]">
       <div className="aspect-square relative mb-4 overflow-hidden rounded-md">
         <Image
           src={"/placeholder.svg"}
-          alt={`Product ${productId}`}
+          alt={`Product ${buttonId}`}
           fill
           className="object-cover"
         />

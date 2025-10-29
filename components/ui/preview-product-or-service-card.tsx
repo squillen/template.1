@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { Button } from "./button";
 
-export function PreviewProductCard({
-  productId,
+export function PreviewProductOrServiceCard({
+  buttonId,
   productIndex,
 }: {
-  productId: string;
+  buttonId: string;
   productIndex: number;
 }) {
   return (
@@ -16,7 +16,7 @@ export function PreviewProductCard({
             <div className="aspect-square relative mb-4 overflow-hidden rounded-md">
               <Image
                 src={"/placeholder.svg"}
-                alt={`Product ${productId}`}
+                alt={`Product ${buttonId}`}
                 fill
                 className="object-cover"
               />
@@ -35,7 +35,7 @@ export function PreviewProductCard({
       </div>
       <Button
         className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium"
-        onClick={() => console.log(`Add to cart: ${productId}`)}
+        onClick={() => console.log(`Add to cart: ${buttonId}`)}
       >
         Add to cart
       </Button>

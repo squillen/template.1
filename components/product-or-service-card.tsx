@@ -1,18 +1,19 @@
 "use client"
 
-import { Card, CardFooter } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ProductionProductCard } from "./ui/production-product-card";
-import { PreviewProductCard } from "./ui/preview-product-card";
+import { ProductionProductOrServiceCard } from "./ui/production-product-or-service-card";
+import { PreviewProductOrServiceCard } from "./ui/preview-product-or-service-card";
 
-interface ProductCardProps {
-  productId: string;
+interface ProductOrServiceCardProps {
+  buttonId: string;
   productIndex: number;
+  type: 'products' | 'services'
 }
 
-export function ProductCard({ productId, productIndex }: ProductCardProps) {
-  const paypalButtonId = `paypal-add-to-cart-${productId}`;
+export function ProductOrServiceCard({ buttonId, productIndex, type }: ProductOrServiceCardProps) {
+  const paypalButtonId = `paypal-add-to-cart-${buttonId}`;
   const [isProduction, setIsProduction] = useState(true);
 
   useEffect(() => {
@@ -23,14 +24,14 @@ export function ProductCard({ productId, productIndex }: ProductCardProps) {
     <Card className="bg-card border-border hover:shadow-lg transition-shadow relative">
       {/* PayPal Add to Cart Button in production, custom button in development */}
       {isProduction ? (
-        <ProductionProductCard
+        <ProductionProductOrServiceCard
           paypalButtonId={paypalButtonId}
-          productId={productId}
+          buttonId={buttonId}
         />
       ) : (
         <div className="p-4 pt-0">
-          <PreviewProductCard
-            productId={productId}
+          <PreviewProductOrServiceCard
+            buttonId={buttonId}
             productIndex={productIndex}
           />
         </div>
@@ -38,7 +39,7 @@ export function ProductCard({ productId, productIndex }: ProductCardProps) {
       <div className="p-4 pt-0 absolute bottom-px">
         <Link
           className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200 hover:underline"
-          href={`/products/${productId}`}
+          href={`/${type}/${buttonId}`}
         >
           See more
           <svg

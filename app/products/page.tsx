@@ -1,5 +1,5 @@
 import { Header } from "@/components/header";
-import { ProductsSection } from "@/components/products-section";
+import { ProductsOrServicesSection } from "@/components/products-or-services-section";
 import { Footer } from "@/components/footer";
 
 export default function ProductsPage() {
@@ -7,7 +7,7 @@ export default function ProductsPage() {
     <div className="min-h-screen">
       <Header />
       <main>
-        <ProductsSection />
+        <ProductsOrServicesSection />
       </main>
       <Footer />
     </div>
