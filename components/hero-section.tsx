@@ -14,28 +14,6 @@ export function HeroSection() {
             Transform Your Business with{" "}
             <span className="text-secondary">Professional Solutions</span>
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground text-pretty mb-8 max-w-3xl mx-auto">
-            We help businesses grow and succeed with innovative strategies,
-            cutting-edge technology, and personalized service that delivers real
-            results.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-3"
-            >
-              Get Started Today
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="text-lg px-8 py-3 bg-transparent"
-            >
-              <Play className="mr-2 h-5 w-5" />
-              Watch Demo
-            </Button>
-          </div>
 
           {/* Hero Image Section */}
           <div className="mt-16 mb-12 relative">
@@ -57,6 +35,29 @@ export function HeroSection() {
                 </p>
               </div>
             </div>
+          </div>
+
+          <p className="text-xl md:text-2xl text-muted-foreground text-pretty mb-8 max-w-3xl mx-auto">
+            We help businesses grow and succeed with innovative strategies,
+            cutting-edge technology, and personalized service that delivers real
+            results.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-3"
+            >
+              Get Started Today
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="text-lg px-8 py-3 bg-transparent"
+            >
+              <Play className="mr-2 h-5 w-5" />
+              Watch Demo
+            </Button>
           </div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
