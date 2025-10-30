@@ -10,6 +10,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
+    // IMPORTANT: DO NOT CHANGE THE STYLING OF THIS HEADER TO ENSURE COMPATIBILITY WITH THE PAYPAL BUTTON INJECTION
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
         <div className="flex h-16 items-center justify-between min-w-0">
