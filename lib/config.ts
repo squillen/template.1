@@ -21,7 +21,7 @@ const defaultButtonIds = {
   8: "8H2XH6LR4HV4C", // Product 8
 };
 
-const dynamicButtonIds = process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS?.split(
+const dynamicButtonIds = process.env.NEXT_PUBLIC_PAYPAL_SERVICE_BUTTON_IDS?.split(
   ","
 )?.reduce((acc: Record<number, string>, buttonId: string) => {
   acc[Object.keys(acc).length + 1] = buttonId;
@@ -44,7 +44,7 @@ export const storeConfig = {
   paypal: {
     merchantId:
       process.env.NEXT_PUBLIC_PAYPAL_MERCHANT_ID &&
-      process.env.NEXT_PUBLIC_PAYPAL_BUTTON_IDS
+      process.env.NEXT_PUBLIC_PAYPAL_SERVICE_BUTTON_IDS
         ? process.env.NEXT_PUBLIC_PAYPAL_MERCHANT_ID
         : "PRBQR9MAHMDL6",
     buttonIds,
@@ -55,7 +55,7 @@ export const storeConfig = {
 export const products: Product[] = [
   {
     id: 1,
-    name: "Product 1",
+    name: "Service 1",
     price: 4.99,
     image: "/placeholder.svg?height=200&width=200",
     description: "Description for product 1",
@@ -65,7 +65,7 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    name: "Product 2",
+    name: "Service 2",
     price: 2.99,
     image: "/placeholder.svg?height=200&width=200",
     description: "Description for product 2",
@@ -75,7 +75,7 @@ export const products: Product[] = [
   },
   {
     id: 3,
-    name: "Product 3",
+    name: "Service 3",
     price: 3.49,
     image: "/placeholder.svg?height=200&width=200",
     description: "Description for product 3",
@@ -85,7 +85,7 @@ export const products: Product[] = [
   },
   {
     id: 4,
-    name: "Product 4",
+    name: "Service 4",
     price: 5.99,
     image: "/placeholder.svg?height=200&width=200",
     description: "Description for product 4",
@@ -95,7 +95,7 @@ export const products: Product[] = [
   },
   {
     id: 5,
-    name: "Product 5",
+    name: "Service 5",
     price: 3.99,
     image: "/placeholder.svg?height=200&width=200",
     description: "Description for product 5",
@@ -105,7 +105,7 @@ export const products: Product[] = [
   },
   {
     id: 6,
-    name: "Product 6",
+    name: "Service 6",
     price: 3.79,
     image: "/placeholder.svg?height=200&width=200",
     description: "Description for product 6",
@@ -115,7 +115,7 @@ export const products: Product[] = [
   },
   {
     id: 7,
-    name: "Product 7",
+    name: "Service 7",
     price: 2.49,
     image: "/placeholder.svg?height=200&width=200",
     description: "Description for product 7",
@@ -125,7 +125,7 @@ export const products: Product[] = [
   },
   {
     id: 8,
-    name: "Product 8",
+    name: "Service 8",
     price: 2.79,
     image: "/placeholder.svg?height=200&width=200",
     description: "Description for product 8",
