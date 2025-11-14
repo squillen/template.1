@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 import { usePathname } from "next/navigation";
-import { storeConfig, productButtonIds, serviceButtonIds } from "@/lib/config";
+import { productButtonIds, serviceButtonIds } from "@/lib/config";
 
 export function PayPalInjectButtons() {
   const pathname = usePathname();

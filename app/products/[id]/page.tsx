@@ -29,7 +29,7 @@ export default function ProductPage() {
               <ProductionProductOrServiceCard
                 paypalButtonId={paypalButtonId}
                 buttonId={buttonId}
-                type={"products"}
+                type="products"
               />
             ) : (
               <div className="p-4 pt-0">
