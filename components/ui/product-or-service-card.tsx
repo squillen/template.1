@@ -3,8 +3,8 @@
 import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ProductionProductOrServiceCard } from "./ui/production-product-or-service-card";
-import { PreviewProductOrServiceCard } from "./ui/preview-product-or-service-card";
+import { ProductionProductOrServiceCard } from "./production-product-or-service-card";
+import { PreviewProductOrServiceCard } from "./preview-product-or-service-card";
 
 interface ProductOrServiceCardProps {
   buttonId: string;

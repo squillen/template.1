@@ -1,6 +1,6 @@
 "use client"
 
-import { ProductOrServiceCard } from "@/components/product-or-service-card"
+import { ProductOrServiceCard } from "@/components/ui/product-or-service-card"
 import { productButtonIds, serviceButtonIds } from "@/lib/config";
 
 export function ProductsOrServicesSection({ type = "products" }: { type?: 'products' | 'services' }) {
