@@ -5,16 +5,18 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { productButtonIds, serviceButtonIds } from "@/lib/config";
+import { useIsMobile } from "@/hooks/utils";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     // IMPORTANT: DO NOT CHANGE THE STYLING OF THIS HEADER TO ENSURE COMPATIBILITY WITH THE PAYPAL BUTTON INJECTION
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
         <div className="flex h-16 items-center justify-between min-w-0">
-          {/* Logo */}
+          {/* LOGO */}
           <div className="flex items-center flex-shrink-0">
             <Link
               href="/"
@@ -24,66 +26,67 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8 flex-shrink-0">
-            <Link
-              href="/"
-              className="text-foreground hover:text-secondary transition-colors"
-            >
-              Home
-            </Link>
-            {productButtonIds.length && (
+          {/* DESKTOP NAV */}
+          {!isMobile && (
+            <nav className="flex items-center space-x-8 flex-shrink-0">
               <Link
-                href="/products"
+                href="/"
                 className="text-foreground hover:text-secondary transition-colors"
               >
-                Products
+                Home
               </Link>
-            )}
-            {serviceButtonIds.length && (
+              {productButtonIds.length && (
+                <Link
+                  href="/products"
+                  className="text-foreground hover:text-secondary transition-colors"
+                >
+                  Products
+                </Link>
+              )}
+              {serviceButtonIds.length && (
+                <Link
+                  href="/services"
+                  className="text-foreground hover:text-secondary transition-colors"
+                >
+                  Services
+                </Link>
+              )}
               <Link
-                href="/services"
+                href="/contact"
                 className="text-foreground hover:text-secondary transition-colors"
               >
-                Services
+                Contact
               </Link>
-            )}
-            <Link
-              href="/contact"
-              className="text-foreground hover:text-secondary transition-colors"
-            >
-              Contact
-            </Link>
-            <Link
-              href="/about"
-              className="text-foreground hover:text-secondary transition-colors"
-            >
-              About
-            </Link>
-          </nav>
+              <Link
+                href="/about"
+                className="text-foreground hover:text-secondary transition-colors"
+              >
+                About
+              </Link>
+            </nav>
+          )}
 
           {/* CTA Button and Cart */}
           <div className="flex-shrink-0">
             <div id="paypal-view-cart-container"></div>
           </div>
 
-          {/* Mobile Menu Button and Cart */}
-          <div className="md:hidden flex items-center gap-2 flex-shrink-0">
-            {/* {children} */}
-            <div id="paypal-view-cart-container"></div>
-            <button
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {isMobile && (
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <div id="paypal-view-cart-container"></div>
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden">
+        {isMenuOpen && isMobile && (
+          <div>
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
               <Link
                 href="/"
