@@ -12,7 +12,6 @@ export function Header() {
   const isMobile = useIsMobile();
 
   return (
-    // IMPORTANT: DO NOT CHANGE THE STYLING OF THIS HEADER TO ENSURE COMPATIBILITY WITH THE PAYPAL BUTTON INJECTION
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
         <div className="flex h-16 items-center justify-between min-w-0">
@@ -66,14 +65,13 @@ export function Header() {
             </nav>
           )}
 
-          {/* CTA Button and Cart */}
+          {/* CTA CART */}
           <div className="flex-shrink-0">
             <div id="paypal-view-cart-container"></div>
           </div>
 
           {isMobile && (
             <div className="flex items-center gap-2 flex-shrink-0">
-              <div id="paypal-view-cart-container"></div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
@@ -84,7 +82,7 @@ export function Header() {
           )}
         </div>
 
-        {/* Mobile Navigation */}
+        {/* MOBILE NAV */}
         {isMenuOpen && isMobile && (
           <div>
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
