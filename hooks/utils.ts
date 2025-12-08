@@ -22,3 +22,17 @@ export function useIsMobile() {
 
   return isMobile;
 }
+
+/**
+ * Checks if the current environment is a staging environment
+ */
+export function useIsStageEnvironment() {
+  const [isStage, setIsStage] = useState(true);
+
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    setIsStage(hostname.endsWith("vusercontent.net"));
+  }, []);
+
+  return isStage;
+}

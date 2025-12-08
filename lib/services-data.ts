@@ -1,35 +1,31 @@
-export interface ServiceData {
-  id: string
-  name: string
-  description: string
-  image: string
-  price: number
-  category: string
-  features?: string[]
-  duration?: string
-}
+import { Item } from "@/components/ui/product-or-service-card";
 
 // THIS WILL CHANGE BASED ON THE UPLOADED SERVICE INFORMATION
-export const servicesData: Record<string, ServiceData> = {
-  ahjksdf: {
+// todo update this format to reflect the sdk data structure
+export const mockServicesData: Item[] = [
+  {
     id: "ahjksdf",
     name: "Custom Cake Making",
+    status: "ACTIVE",
+    type: "SERVICE",
     description:
       "Our signature custom cake making service brings your vision to life. From elegant wedding cakes to whimsical birthday creations, our master pastry chefs craft each cake with meticulous attention to detail using only the finest ingredients.",
-    image: "/services/cake-making.jpg",
-    price: 100.0,
-    category: "Custom Services",
-    features: [
-      "Personalized design consultation",
-      "Premium ingredients and flavors",
-      "Custom decorations and themes",
-      "Professional delivery and setup",
-      "Serves 10-12 people (base size)",
+    image: { default: "/services/cake-making.jpg" },
+    variants: [
+      {
+        id: "ahjksdf",
+        name: "Custom Cake Making",
+        description:
+          "Our signature custom cake making service brings your vision to life. From elegant wedding cakes to whimsical birthday creations, our master pastry chefs craft each cake with meticulous attention to detail using only the finest ingredients.",
+        prices: [
+          {
+            currency_code: "USD",
+            value: "100.00",
+          },
+        ],
+        image: { default: "/services/cake-making.jpg" },
+        images: [{ default: "/services/cake-making.jpg" }],
+      },
     ],
-    duration: "2-3 weeks lead time",
   },
-}
-
-export function getServiceData(buttonId: string): ServiceData | undefined {
-  return servicesData[buttonId]
-}
+];

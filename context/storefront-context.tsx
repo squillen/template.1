@@ -156,7 +156,7 @@ export function useStorefrontMethod<T>(
   options: UseStorefrontMethodOptions<T> = {}
 ) {
   const { sdk, isLoading: sdkLoading, error: sdkError } = useStorefront();
-  const [data, setData] = useState<T | null>(null);
+  const [data, setData] = useState<T | null>({} as T);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -212,7 +212,6 @@ export function useStorefrontMethod<T>(
       setError(null);
 
       try {
-        console.log(`Fetching ${methodName} with args:`, args);
         const result = await sdk[methodName](...args);
 
         if (isMountedRef.current) {

@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useAddToCart } from "@/hooks/storefront/cart";
 import { Button } from "./button";
+import { useIsStageEnvironment } from "@/hooks/utils";
 
 export default function AddToCartButton({
   quantity,
@@ -14,13 +14,8 @@ export default function AddToCartButton({
   variantId: string;
   type: "products" | "services";
 }) {
-  const [isStage, setIsStage] = useState(true);
+  const isStage = useIsStageEnvironment();
   const { makeRequest: addToCart } = useAddToCart();
-
-  useEffect(() => {
-	const hostname = window.location.hostname;
-    setIsStage(hostname.endsWith("vusercontent.net") || hostname === "localhost");
-  }, []);
 
   return (
     <Button

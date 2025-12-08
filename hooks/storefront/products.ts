@@ -4,6 +4,8 @@ import {
   type UseStorefrontMethodOptions,
 } from "@/context/storefront-context";
 import { useEffect, useState } from "react";
+import { useIsStageEnvironment } from "../utils";
+import { mockProductsData } from "@/lib/products-data";
 
 /**
  * Fetch all storefront products
@@ -13,13 +15,23 @@ export function useFetchProducts(
 ) {
   const { fetchOptions, ...restOptions } = options;
 
-  return useStorefrontMethod("getProducts", {
+  let result = useStorefrontMethod("getProducts", {
     fetchOptions: {
       includeTotalCount: true,
       ...(fetchOptions as FetchOptions),
     },
     ...restOptions,
   });
+
+  if (useIsStageEnvironment()) {
+    result = {
+      data: { products: mockProductsData, totalItems: mockProductsData.length },
+      isLoading: false,
+      error: null,
+    } as typeof result;
+  }
+
+  return result;
 }
 
 export const useProductsCount = (

@@ -2,8 +2,9 @@
 
 import { ProductOrServiceCard } from "@/components/ui/product-or-service-card"
 import { useFetchProducts } from "@/hooks/storefront/products";
-import { useFetchService } from "@/hooks/storefront/services";
+import { useFetchServices } from "@/hooks/storefront/services";
 import { Loading } from "./loading";
+import { Error } from "./error";
 
 /**
  * A section component that displays a list of products or services.
@@ -13,9 +14,9 @@ export function ProductsOrServicesSection({
 }: {
   type?: "products" | "services";
 }) {
-  const toFetch = type === "products" ? useFetchProducts : useFetchService;
+  const isProducts = type === "products";
+  const toFetch = isProducts ? useFetchProducts : useFetchServices;
   const { data, error, isLoading } = toFetch();
-  const { products } = data || {};
 
   const { headerText, noInventoryText } = {
     services: {
@@ -33,18 +34,14 @@ export function ProductsOrServicesSection({
   }
 
   if (error) {
-    return (
-      <section className="p-[2rem]">
-        <div>Error loading products or services.</div>
-      </section>
-    );
+    return <Error message="Error loading products or services." />;
   }
 
-  return products?.length ? (
+  return data?.products?.length ? (
     <section className="p-[2rem]">
       <h2 className="text-2xl font-bold text-foreground mb-6">{headerText}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {products.map((item, productIndex) => (
+        {data?.products.map((item, productIndex) => (
           <ProductOrServiceCard
             key={item.id}
             item={item}

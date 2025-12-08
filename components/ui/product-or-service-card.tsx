@@ -5,12 +5,12 @@ import Link from "next/link";
 import { ProductOrServiceCardContent } from "./product-or-service-card-content";
 
 type Image = {
-  default: string;
-  thumbnail: string;
-  small: string;
-  medium: string;
-  large: string;
-  alt: string;
+  default?: string;
+  thumbnail?: string;
+  small?: string;
+  medium?: string;
+  large?: string;
+  alt?: string;
 };
 export type Item = {
   id: string;
@@ -18,30 +18,14 @@ export type Item = {
   description: string;
   type: string;
   status: string;
-  labels: string[];
-  seo: boolean;
-  image: {
-    default: string;
-    thumbnail: string;
-    small: string;
-    medium: string;
-    large: string;
-    alt: string;
-  };
-  images: [
-    {
-      default: string;
-      thumbnail: string;
-      small: string;
-      medium: string;
-      large: string;
-      alt: string;
-    }
-  ];
+  labels?: string[];
+  seo?: boolean;
+  image?: Image;
+  images?: Image[];
   variants: [
     {
       id: string;
-      sku: string;
+      sku?: string;
       name: string;
       description: string;
       prices: [
@@ -50,7 +34,7 @@ export type Item = {
           value: string;
         }
       ];
-      options: [
+      options?: [
         {
           name: string;
           value: string;
@@ -62,7 +46,7 @@ export type Item = {
   ];
 };
 interface ProductOrServiceCardProps {
-  item: Item; // todo get this types from sdk? or make our own
+  item: Item;
   productIndex?: number;
   type: "products" | "services";
   showFooter?: boolean;

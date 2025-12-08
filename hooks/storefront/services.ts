@@ -1,6 +1,12 @@
-import { FetchOptions, useStorefrontMethod, UseStorefrontMethodOptions } from "@/context/storefront-context";
+import {
+  FetchOptions,
+  useStorefrontMethod,
+  UseStorefrontMethodOptions,
+} from "@/context/storefront-context";
 import { useFetchProduct } from "./products";
 import { useEffect, useState } from "react";
+import { useIsStageEnvironment } from "../utils";
+import { mockServicesData } from "@/lib/services-data";
 
 /**
  * Fetch all storefront services
@@ -10,14 +16,28 @@ export function useFetchServices(
 ) {
   const { fetchOptions, ...restOptions } = options;
 
-  return useStorefrontMethod("getProducts", {
-	fetchOptions: {
-	  includeTotalCount: true,
-	  filter: `type:SERVICES`,
-	  ...(fetchOptions as FetchOptions),
-	},
-	...restOptions,
+  let result = useStorefrontMethod("getProducts", {
+    fetchOptions: {
+      includeTotalCount: true,
+      filter: `type:SERVICES`,
+      ...(fetchOptions as FetchOptions),
+    },
+    ...restOptions,
   });
+
+    if (useIsStageEnvironment()) {
+    result = {
+      data: {
+        products: mockServicesData,
+        totalItems: mockServicesData.length,
+      },
+      isLoading: false,
+      error: null,
+    } as typeof result;
+  }
+
+  return result
+
 }
 
 export const useServicesCount = (
@@ -27,12 +47,12 @@ export const useServicesCount = (
   const { data } = useFetchServices(options);
 
   useEffect(() => {
-	if (data?.totalItems !== undefined) {
-	  setServicesCount(data.totalItems);
-	}
+    if (data?.totalItems !== undefined) {
+      setServicesCount(data.totalItems);
+    }
   }, [data?.totalItems]);
 
   return servicesCount;
 };
 
-export const useFetchService = useFetchProduct
+export const useFetchService = useFetchProduct;
