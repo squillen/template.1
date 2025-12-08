@@ -1,6 +1,7 @@
 "use client";
 
-import { useProductsCount, useServicesCount } from "@/hooks/storefront";
+import { useProductsCount } from "@/hooks/storefront/products";
+import { useServicesCount } from "@/hooks/storefront/services";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Link from "next/link";
 

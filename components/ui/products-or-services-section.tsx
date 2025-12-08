@@ -2,6 +2,7 @@
 
 import { ProductOrServiceCard } from "@/components/ui/product-or-service-card"
 import { useFetchProducts } from "@/hooks/storefront/products";
+import { useFetchService } from "@/hooks/storefront/services";
 import { Loading } from "./loading";
 
 /**
@@ -12,9 +13,8 @@ export function ProductsOrServicesSection({
 }: {
   type?: "products" | "services";
 }) {
-  // todo need to handle services too
-  const { data, error, isLoading } = useFetchProducts();
-  // const { data, error, isLoading } = useFetchProducts({ fetchOptions: { filter: `type[not]:PHYSICAL_GOODS` } });
+  const toFetch = type === "products" ? useFetchProducts : useFetchService;
+  const { data, error, isLoading } = toFetch();
   const { products } = data || {};
 
   const { headerText, noInventoryText } = {

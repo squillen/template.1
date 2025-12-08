@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import CartButton from "./ui/cart-button";
 import { useIsMobile } from "@/hooks/utils";
-import { useProductsCount, useServicesCount } from "@/hooks/storefront";
+import { useProductsCount } from "@/hooks/storefront/products";
+import { useServicesCount } from "@/hooks/storefront/services";
 
 export function Header() {
   const productsExist = useProductsCount();
