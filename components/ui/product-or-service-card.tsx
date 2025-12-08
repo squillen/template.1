@@ -1,64 +1,111 @@
 "use client"
 
 import { Card } from "@/components/ui/card";
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ProductionProductOrServiceCard } from "./production-product-or-service-card";
-import { PreviewProductOrServiceCard } from "./preview-product-or-service-card";
+import { ProductOrServiceCardContent } from "./product-or-service-card-content";
 
+type Image = {
+  default: string;
+  thumbnail: string;
+  small: string;
+  medium: string;
+  large: string;
+  alt: string;
+};
+export type Item = {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  status: string;
+  labels: string[];
+  seo: boolean;
+  image: {
+    default: string;
+    thumbnail: string;
+    small: string;
+    medium: string;
+    large: string;
+    alt: string;
+  };
+  images: [
+    {
+      default: string;
+      thumbnail: string;
+      small: string;
+      medium: string;
+      large: string;
+      alt: string;
+    }
+  ];
+  variants: [
+    {
+      id: string;
+      sku: string;
+      name: string;
+      description: string;
+      prices: [
+        {
+          currency_code: string;
+          value: string;
+        }
+      ];
+      options: [
+        {
+          name: string;
+          value: string;
+        }
+      ];
+      image: Image;
+      images: Image[];
+    }
+  ];
+};
 interface ProductOrServiceCardProps {
-  buttonId: string;
-  productIndex: number;
-  type: 'products' | 'services'
+  item: Item; // todo get this types from sdk? or make our own
+  productIndex?: number;
+  type: "products" | "services";
+  showFooter?: boolean;
 }
 
-export function ProductOrServiceCard({ buttonId, productIndex, type }: ProductOrServiceCardProps) {
-  const paypalButtonId = `paypal-add-to-cart-${buttonId}`;
-  const [isProduction, setIsProduction] = useState(true);
-
-  useEffect(() => {
-    setIsProduction(window.location.hostname.endsWith(".vercel.app"));
-  }, []);
-
+export function ProductOrServiceCard({
+  item,
+  productIndex = 1,
+  type,
+  showFooter = true,
+}: ProductOrServiceCardProps) {
   return (
     <Card className="bg-card border-border hover:shadow-lg transition-shadow relative">
-      {/* PayPal Add to Cart Button in production, custom button in development */}
-      {isProduction ? (
-        <ProductionProductOrServiceCard
-          paypalButtonId={paypalButtonId}
-          buttonId={buttonId}
+      <div className="p-4 pt-0">
+        <ProductOrServiceCardContent
+          item={item}
+          productIndex={productIndex}
           type={type}
         />
-      ) : (
-        <div className="p-4 pt-0">
-          <PreviewProductOrServiceCard
-            buttonId={buttonId}
-            productIndex={productIndex}
-            type={type}
-          />
+      </div>
+      {showFooter && (
+        <div className="p-4 pt-0 absolute bottom-px">
+          <Link
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200 hover:underline"
+            href={`/${type}/${item.id}`}
+          >
+            See more
+            <svg
+              className="w-3 h-3 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
         </div>
       )}
-      <div className="p-4 pt-0 absolute bottom-px">
-        <Link
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200 hover:underline"
-          href={`/${type}/${buttonId}`}
-        >
-          See more
-          <svg
-            className="w-3 h-3 ml-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
-      </div>
     </Card>
   );
 }

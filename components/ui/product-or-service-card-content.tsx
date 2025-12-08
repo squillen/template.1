@@ -1,21 +1,27 @@
-import Image from "next/image";
-import { Button } from "./button";
-import { getProductData } from "@/lib/products-data";
-import { getServiceData } from "@/lib/services-data";
+"use client";
 
-export function PreviewProductOrServiceCard({
-  buttonId,
+import Image from "next/image";
+import { useState } from "react";
+import { Item } from "./product-or-service-card";
+import AddToCartButton from "./add-to-cart-button";
+
+export function ProductOrServiceCardContent({
+  item,
   productIndex,
   type = "products",
 }: {
-  buttonId: string;
+  item: Item;
   productIndex: number;
   type?: "products" | "services";
 }) {
-  const productData = type === "products" ? getProductData(buttonId) : null;
-  const serviceData = type === "services" ? getServiceData(buttonId) : null;
-  const data = productData || serviceData;
+  // todo move this to its own component so that only it will use state
+  const [quantity, setQuantity] = useState(1);
 
+  const variant = item?.variants?.[0] || {};
+  const name = variant.name || item.name;
+  const description = variant.description || item.description;
+  const price = variant.prices?.[0]?.value || 0;
+  const image = (item?.image || variant?.image)?.default;
   const itemLabel = type === "services" ? "Service" : "Product";
 
   return (
@@ -25,38 +31,38 @@ export function PreviewProductOrServiceCard({
           <div className="w-full">
             <div className="aspect-square relative mb-4 overflow-hidden rounded-lg ring-1 ring-border/50">
               <Image
-                src={data?.image || "/placeholder.svg"}
-                alt={data?.name || `${itemLabel} ${buttonId}`}
+                src={image || "/placeholder.svg"}
+                alt={name || `${itemLabel} ${variant.id}`}
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
             <h3 className="font-semibold text-card-foreground mb-2 text-lg">
-              {data?.name || `${itemLabel} ${productIndex + 1}`}
+              {name || `${itemLabel} ${productIndex + 1}`}
             </h3>
-            {data?.price && (
+            {price && (
               <p className="text-xl font-bold text-secondary mb-3">
-                ${data.price.toFixed(2)}
+                ${Number(price || 0)?.toFixed(2)}
               </p>
             )}
-            {data?.description && (
+            {description && (
               <p className="text-sm text-muted-foreground mb-3 line-clamp-2 leading-relaxed">
-                {data.description}
+                {description}
               </p>
             )}
-            {productData?.quantity && (
+            {variant?.quantity && (
               <p className="text-xs text-muted-foreground mb-2 font-medium">
-                Available: {productData.quantity}
+                Available: {variant.quantity}
               </p>
             )}
-            {serviceData?.duration && (
+            {variant?.duration && (
               <p className="text-xs text-muted-foreground mb-2 font-medium">
-                Lead time: {serviceData.duration}
+                Lead time: {variant.duration}
               </p>
             )}
-            {serviceData?.features && serviceData.features.length > 0 && (
+            {variant?.features && variant.features.length > 0 && (
               <ul className="text-xs text-muted-foreground mb-3 space-y-1">
-                {serviceData.features.slice(0, 3).map((feature, idx) => (
+                {variant.features.slice(0, 3).map((feature, idx) => (
                   <li key={idx} className="flex items-start">
                     <span className="mr-2 text-secondary">✓</span>
                     <span>{feature}</span>
@@ -67,18 +73,12 @@ export function PreviewProductOrServiceCard({
           </div>
         </div>
       </div>
-      <Button
-        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md hover:shadow-lg transition-all h-11"
-        onClick={() =>
-          console.log(
-            `${
-              type === "services" ? "Book service" : "Add to cart"
-            }: ${buttonId}`
-          )
-        }
-      >
-        {type === "services" ? "Book Service" : "Add to Cart"}
-      </Button>
+      <AddToCartButton
+        quantity={quantity}
+        productId={variant.id}
+        variantId={variant.id}
+        type={type}
+      />
     </div>
   );
 }

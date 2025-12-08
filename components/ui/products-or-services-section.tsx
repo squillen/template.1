@@ -1,34 +1,53 @@
 "use client"
 
 import { ProductOrServiceCard } from "@/components/ui/product-or-service-card"
-import { productButtonIds, serviceButtonIds } from "@/lib/config";
+import { useFetchProducts } from "@/hooks/storefront/products";
+import { Loading } from "./loading";
 
-export function ProductsOrServicesSection({ type = "products" }: { type?: 'products' | 'services' }) {
-  const { headerText, noInventoryText, buttonIds } = {
+/**
+ * A section component that displays a list of products or services.
+ */
+export function ProductsOrServicesSection({
+  type = "products",
+}: {
+  type?: "products" | "services";
+}) {
+  // todo need to handle services too
+  const { data, error, isLoading } = useFetchProducts();
+  // const { data, error, isLoading } = useFetchProducts({ fetchOptions: { filter: `type[not]:PHYSICAL_GOODS` } });
+  const { products } = data || {};
+
+  const { headerText, noInventoryText } = {
     services: {
       headerText: "Our Services",
       noInventoryText: "No services yet",
-      buttonIds: serviceButtonIds,
     },
     products: {
       headerText: "Our Products",
       noInventoryText: "No products yet",
-      buttonIds: productButtonIds,
     },
-  }[type] as {
-    headerText: string;
-    noInventoryText: string;
-    buttonIds: string[];
-  };
+  }[type];
 
-  return buttonIds?.length ? (
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return (
+      <section className="p-[2rem]">
+        <div>Error loading products or services.</div>
+      </section>
+    );
+  }
+
+  return products?.length ? (
     <section className="p-[2rem]">
       <h2 className="text-2xl font-bold text-foreground mb-6">{headerText}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {buttonIds.map((buttonId, productIndex) => (
+        {products.map((item, productIndex) => (
           <ProductOrServiceCard
-            key={buttonId}
-            buttonId={buttonId}
+            key={item.id}
+            item={item}
             productIndex={productIndex}
             type={type}
           />

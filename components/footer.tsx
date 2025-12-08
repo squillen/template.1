@@ -1,15 +1,13 @@
-import { productButtonIds, serviceButtonIds } from "@/lib/config";
-import {
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-  Mail,
-  Phone,
-  MapPin,
-} from "lucide-react";
+"use client";
+
+import { useProductsCount, useServicesCount } from "@/hooks/storefront";
+import { Mail, Phone, MapPin } from "lucide-react";
+import Link from "next/link";
 
 export function Footer() {
+  const productsExist = useProductsCount();
+  const servicesExist = useServicesCount();
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -21,32 +19,6 @@ export function Footer() {
               Transforming businesses through innovative solutions and strategic
               partnerships. Your success is our mission.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -69,24 +41,24 @@ export function Footer() {
                   About
                 </a>
               </li>
-              {productButtonIds.length && (
+              {!!productsExist && (
                 <li>
-                  <a
+                  <Link
                     href="/products"
                     className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
-                    Services
-                  </a>
+                    Products
+                  </Link>
                 </li>
               )}
-              {serviceButtonIds.length && (
+              {!!servicesExist && (
                 <li>
-                  <a
+                  <Link
                     href="/services"
                     className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     Services
-                  </a>
+                  </Link>
                 </li>
               )}
               <li>
