@@ -25,7 +25,7 @@ export default function ProductOrServicePage({
   }
 
   return (
-    <section className="p-8">
+    <section className="p-8 w-full md:w-[50%] mx-auto">
       {data?.id ? (
         <ProductOrServiceCard
           type={type}

@@ -5,26 +5,26 @@ import { Item } from "@/components/ui/product-or-service-card";
 export const mockServicesData: Item[] = [
   {
     id: "ahjksdf",
-    name: "Custom Cake Making",
+    name: "Service 1",
     status: "ACTIVE",
     type: "SERVICE",
     description:
-      "Our signature custom cake making service brings your vision to life. From elegant wedding cakes to whimsical birthday creations, our master pastry chefs craft each cake with meticulous attention to detail using only the finest ingredients.",
-    image: { default: "/services/cake-making.jpg" },
+      "Service 1 description.",
+    image: { default: "/services/service-1.jpg" },
     variants: [
       {
         id: "ahjksdf",
-        name: "Custom Cake Making",
+        name: "Service 1",
         description:
-          "Our signature custom cake making service brings your vision to life. From elegant wedding cakes to whimsical birthday creations, our master pastry chefs craft each cake with meticulous attention to detail using only the finest ingredients.",
+          "Service 1 description.",
         prices: [
           {
             currency_code: "USD",
             value: "100.00",
           },
         ],
-        image: { default: "/services/cake-making.jpg" },
-        images: [{ default: "/services/cake-making.jpg" }],
+        image: { default: "/services/service-1.jpg" },
+        images: [{ default: "/services/service-1.jpg" }],
       },
     ],
   },

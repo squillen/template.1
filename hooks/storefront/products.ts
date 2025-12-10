@@ -6,6 +6,7 @@ import {
 import { useEffect, useState } from "react";
 import { useIsStageEnvironment } from "../utils";
 import { mockProductsData } from "@/lib/products-data";
+import { mockServicesData } from "@/lib/services-data";
 
 /**
  * Fetch all storefront products
@@ -61,5 +62,21 @@ export function useFetchProduct(
     options.autoFetch = true;
   }
 
-  return useStorefrontMethod("getProduct", { autoFetch: false, ...options });
+  let result = useStorefrontMethod("getProduct", {
+    autoFetch: false,
+    ...options,
+  });
+
+  if (useIsStageEnvironment()) {
+    result = {
+      data:
+        [...mockProductsData, ...mockServicesData].find(
+          (product) => product.id === idToFetch
+        ) || null,
+      isLoading: false,
+      error: null,
+    } as typeof result;
+  }
+
+  return result;
 }

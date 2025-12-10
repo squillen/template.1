@@ -1,115 +1,96 @@
 import { Item } from "@/components/ui/product-or-service-card";
 
-export interface ProductData {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  color: string;
-  quantity: number;
-  price?: number;
-  category: string;
-}
-
 // THIS WILL CHANGE BASED ON THE UPLOADED PRODUCT INFORMATION
 export const mockProductsData: Item[] = [
   {
     id: "7E9TJFN7KJTYW",
-    name: "Crème Brûlée",
+    name: "Product 1",
     status: "ACTIVE",
     type: "PHYSICAL_GOODS",
-    description:
-      "Classic French dessert with a rich vanilla custard base and a perfectly caramelized sugar crust. A timeless indulgence.",
-    image: { default: "/products/creme-brulee.jpg" },
+    description: "Product 1 description.",
+    image: { default: "/products/product-1.jpg" },
     variants: [
       {
         id: "7E9TJFN7KJTYW",
-        name: "Crème Brûlée",
-        description:
-          "Classic French dessert with a rich vanilla custard base and a perfectly caramelized sugar crust. A timeless indulgence.",
+        name: "Product 1",
+        description: "Product 1 description.",
         prices: [
           {
             currency_code: "USD",
             value: "12.99",
           },
         ],
-        image: { default: "/products/creme-brulee.jpg" },
-        images: [{ default: "/products/creme-brulee.jpg" }],
+        image: { default: "/products/product-1.jpg" },
+        images: [{ default: "/products/product-1.jpg" }],
       },
     ],
   },
   {
     id: "MB38UZWEWT6HS",
-    name: "Brownies",
+    name: "Product 2",
     status: "ACTIVE",
     type: "PHYSICAL_GOODS",
-    description:
-      "Decadent fudgy brownies made with premium dark chocolate. Rich, moist, and utterly irresistible.",
-    image: { default: "/products/brownies.jpg" },
+    description: "Product 2 description.",
+    image: { default: "/products/product-2.jpg" },
     variants: [
       {
         id: "MB38UZWEWT6HS",
-        name: "Brownies",
-        description:
-          "Decadent fudgy brownies made with premium dark chocolate. Rich, moist, and utterly irresistible.",
+        name: "Product 2",
+        description: "Product 2 description.",
         prices: [
           {
             currency_code: "USD",
             value: "8.99",
           },
         ],
-        image: { default: "/products/brownies.jpg" },
-        images: [{ default: "/products/brownies.jpg" }],
+        image: { default: "/products/product-2.jpg" },
+        images: [{ default: "/products/product-2.jpg" }],
       },
     ],
   },
   {
     id: "RSNZTN5ZLYFG6",
-    name: "Chocolate Cake",
+    name: "Product 3",
     status: "ACTIVE",
     type: "PHYSICAL_GOODS",
-    description:
-      "Luxurious multi-layer chocolate cake with silky chocolate ganache. A chocolate lover's dream come true.",
-    image: { default: "/products/chocolate-cake.jpg" },
+    description: "Product 3 description.",
+    image: { default: "/products/product-3.jpg" },
     variants: [
       {
         id: "RSNZTN5ZLYFG6",
-        name: "Chocolate Cake",
-        description:
-          "Luxurious multi-layer chocolate cake with silky chocolate ganache. A chocolate lover's dream come true.",
+        name: "Product 3",
+        description: "Product 3 description.",
         prices: [
           {
             currency_code: "USD",
             value: "29.99",
           },
         ],
-        image: { default: "/products/chocolate-cake.jpg" },
-        images: [{ default: "/products/chocolate-cake.jpg" }],
+        image: { default: "/products/product-3.jpg" },
+        images: [{ default: "/products/product-3.jpg" }],
       },
     ],
   },
   {
     id: "WYUTA3UWHGN88",
-    name: "Chocolate Mousse",
+    name: "Product 4",
     status: "ACTIVE",
     type: "PHYSICAL_GOODS",
-    description:
-      "Light and airy chocolate mousse with a perfect balance of rich chocolate and delicate cream. Elegantly presented.",
-    image: { default: "/products/chocolate-mousse.jpg" },
+    description: "Product 4 description.",
+    image: { default: "/products/product-4.jpg" },
     variants: [
       {
         id: "WYUTA3UWHGN88",
-        name: "Chocolate Mousse",
-        description:
-          "Light and airy chocolate mousse with a perfect balance of rich chocolate and delicate cream. Elegantly presented.",
+        name: "Product 4",
+        description: "Product 4 description.",
         prices: [
           {
             currency_code: "USD",
             value: "9.99",
           },
         ],
-        image: { default: "/products/chocolate-mousse.jpg" },
-        images: [{ default: "/products/chocolate-mousse.jpg" }],
+        image: { default: "/products/product-4.jpg" },
+        images: [{ default: "/products/product-4.jpg" }],
       },
     ],
   },
