@@ -8,7 +8,7 @@ export const mockProductsData: Item[] = [
     status: "ACTIVE",
     type: "PHYSICAL_GOODS",
     description: "Product 1 description.",
-    image: { default: "/products/product-1.jpg" },
+    image: { default: "/placeholder.jpg" }, // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
     variants: [
       {
         id: "7E9TJFN7KJTYW",
@@ -20,8 +20,8 @@ export const mockProductsData: Item[] = [
             value: "12.99",
           },
         ],
-        image: { default: "/products/product-1.jpg" },
-        images: [{ default: "/products/product-1.jpg" }],
+        image: { default: "/placeholder.jpg" }, // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
+        images: [{ default: "/placeholder.jpg" }], // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
       },
     ],
   },
@@ -31,7 +31,7 @@ export const mockProductsData: Item[] = [
     status: "ACTIVE",
     type: "PHYSICAL_GOODS",
     description: "Product 2 description.",
-    image: { default: "/products/product-2.jpg" },
+    image: { default: "/placeholder.jpg" }, // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
     variants: [
       {
         id: "MB38UZWEWT6HS",
@@ -43,8 +43,8 @@ export const mockProductsData: Item[] = [
             value: "8.99",
           },
         ],
-        image: { default: "/products/product-2.jpg" },
-        images: [{ default: "/products/product-2.jpg" }],
+        image: { default: "/placeholder.jpg" }, // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
+        images: [{ default: "/placeholder.jpg" }], // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
       },
     ],
   },
@@ -54,7 +54,7 @@ export const mockProductsData: Item[] = [
     status: "ACTIVE",
     type: "PHYSICAL_GOODS",
     description: "Product 3 description.",
-    image: { default: "/products/product-3.jpg" },
+    image: { default: "/placeholder.jpg" }, // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
     variants: [
       {
         id: "RSNZTN5ZLYFG6",
@@ -66,8 +66,8 @@ export const mockProductsData: Item[] = [
             value: "29.99",
           },
         ],
-        image: { default: "/products/product-3.jpg" },
-        images: [{ default: "/products/product-3.jpg" }],
+        image: { default: "/placeholder.jpg" }, // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
+        images: [{ default: "/placeholder.jpg" }], // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
       },
     ],
   },
@@ -77,7 +77,7 @@ export const mockProductsData: Item[] = [
     status: "ACTIVE",
     type: "PHYSICAL_GOODS",
     description: "Product 4 description.",
-    image: { default: "/products/product-4.jpg" },
+    image: { default: "/placeholder.jpg" }, // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
     variants: [
       {
         id: "WYUTA3UWHGN88",
@@ -89,8 +89,8 @@ export const mockProductsData: Item[] = [
             value: "9.99",
           },
         ],
-        image: { default: "/products/product-4.jpg" },
-        images: [{ default: "/products/product-4.jpg" }],
+        image: { default: "/placeholder.jpg" }, // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
+        images: [{ default: "/placeholder.jpg" }], // IMPORTANT: Generate a new image based on the business name and description provided in the prompt
       },
     ],
   },
