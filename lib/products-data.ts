@@ -1,7 +1,7 @@
-import { Item } from "@/components/ui/product-or-service-card";
+import { Product } from "@/app/types/requests/storefront";
 
 // THIS WILL CHANGE BASED ON THE UPLOADED PRODUCT INFORMATION
-export const mockProductsData: Item[] = [
+export const mockProductsData: Product[] = [
   {
     id: "7E9TJFN7KJTYW",
     name: "Product 1",

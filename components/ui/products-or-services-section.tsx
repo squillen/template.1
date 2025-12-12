@@ -1,22 +1,32 @@
-"use client"
+"use client";
 
-import { ProductOrServiceCard } from "@/components/ui/product-or-service-card"
+import { ProductOrServiceCard } from "@/components/ui/product-or-service-card";
 import { useFetchProducts } from "@/hooks/storefront/products";
 import { useFetchServices } from "@/hooks/storefront/services";
 import { Loading } from "./loading";
 import { Error } from "./error";
+import { Pagination } from "./pagination";
+import { usePageTracking } from "@/hooks/utils";
 
 /**
  * A section component that displays a list of products or services.
  */
 export function ProductsOrServicesSection({
   type = "products",
+  pageSize = 8,
 }: {
   type?: "products" | "services";
+  pageSize?: number;
 }) {
+  const { page, handlePageChange } = usePageTracking();
   const isProducts = type === "products";
   const toFetch = isProducts ? useFetchProducts : useFetchServices;
-  const { data, error, isLoading } = toFetch();
+  const { data, error, isLoading } = toFetch({
+    fetchOptions: {
+      page,
+      pageSize,
+    },
+  });
 
   const { headerText, noInventoryText } = {
     services: {
@@ -49,6 +59,16 @@ export function ProductsOrServicesSection({
             type={type}
           />
         ))}
+      </div>
+      <div className="mt-6">
+        {handlePageChange && (
+          <Pagination
+            currentPage={page}
+            totalItems={data?.totalItems ?? 0}
+            pageSize={pageSize}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
     </section>
   ) : (

@@ -2,15 +2,15 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Item } from "./product-or-service-card";
 import AddToCartButton from "./add-to-cart-button";
+import { Product } from "@/app/types/requests/storefront";
 
 export function ProductOrServiceCardContent({
   item,
   productIndex,
   type = "products",
 }: {
-  item: Item;
+  item: Product;
   productIndex: number;
   type?: "products" | "services";
 }) {

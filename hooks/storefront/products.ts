@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import { useIsStageEnvironment } from "../utils";
 import { mockProductsData } from "@/lib/products-data";
 import { mockServicesData } from "@/lib/services-data";
+import {
+  StorefrontGetProductResponse,
+  StorefrontGetProductsResponse,
+} from "@/app/types/requests/storefront";
 
 /**
  * Fetch all storefront products
@@ -16,13 +20,16 @@ export function useFetchProducts(
 ) {
   const { fetchOptions, ...restOptions } = options;
 
-  let result = useStorefrontMethod("getProducts", {
-    fetchOptions: {
-      includeTotalCount: true,
-      ...(fetchOptions as FetchOptions),
-    },
-    ...restOptions,
-  });
+  let result = useStorefrontMethod<StorefrontGetProductsResponse>(
+    "getProducts",
+    {
+      fetchOptions: {
+        includeTotalCount: true,
+        ...(fetchOptions as FetchOptions),
+      },
+      ...restOptions,
+    }
+  );
 
   if (useIsStageEnvironment()) {
     result = {
@@ -62,7 +69,7 @@ export function useFetchProduct(
     options.autoFetch = true;
   }
 
-  let result = useStorefrontMethod("getProduct", {
+  let result = useStorefrontMethod<StorefrontGetProductResponse>("getProduct", {
     autoFetch: false,
     ...options,
   });

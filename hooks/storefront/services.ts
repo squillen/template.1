@@ -1,12 +1,13 @@
+import { useEffect, useState } from "react";
 import {
   FetchOptions,
   useStorefrontMethod,
   UseStorefrontMethodOptions,
 } from "@/context/storefront-context";
 import { useFetchProduct } from "./products";
-import { useEffect, useState } from "react";
 import { useIsStageEnvironment } from "../utils";
 import { mockServicesData } from "@/lib/services-data";
+import type { StorefrontGetProductsResponse } from "@/app/types/requests/storefront";
 
 /**
  * Fetch all storefront services
@@ -16,10 +17,10 @@ export function useFetchServices(
 ) {
   const { fetchOptions, ...restOptions } = options;
 
-  let result = useStorefrontMethod("getProducts", {
+  let result = useStorefrontMethod<StorefrontGetProductsResponse>("getProducts", {
     fetchOptions: {
       includeTotalCount: true,
-      filter: `type:SERVICES`,
+      filter: `type:SERVICE`,
       ...(fetchOptions as FetchOptions),
     },
     ...restOptions,

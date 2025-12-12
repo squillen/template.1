@@ -3,50 +3,11 @@
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { ProductOrServiceCardContent } from "./product-or-service-card-content";
+import { Product } from "@/app/types/requests/storefront";
 
-type Image = {
-  default?: string;
-  thumbnail?: string;
-  small?: string;
-  medium?: string;
-  large?: string;
-  alt?: string;
-};
-export type Item = {
-  id: string;
-  name: string;
-  description: string;
-  type: string;
-  status: string;
-  labels?: string[];
-  seo?: boolean;
-  image?: Image;
-  images?: Image[];
-  variants: [
-    {
-      id: string;
-      sku?: string;
-      name: string;
-      description: string;
-      prices: [
-        {
-          currency_code: string;
-          value: string;
-        }
-      ];
-      options?: [
-        {
-          name: string;
-          value: string;
-        }
-      ];
-      image: Image;
-      images: Image[];
-    }
-  ];
-};
+
 interface ProductOrServiceCardProps {
-  item: Item;
+  item: Product;
   productIndex?: number;
   type: "products" | "services";
   showFooter?: boolean;

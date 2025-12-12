@@ -1,7 +1,7 @@
-import { Item } from "@/components/ui/product-or-service-card";
+import { Product } from "@/app/types/requests/storefront";
 
 // THIS WILL CHANGE BASED ON THE UPLOADED SERVICE INFORMATION
-export const mockServicesData: Item[] = [
+export const mockServicesData: Product[] = [
   {
     id: "ahjksdf",
     name: "Service 1",
