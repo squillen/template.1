@@ -45,16 +45,9 @@ export function useFetchProducts(
 export const useProductsCount = (
   options: UseStorefrontMethodOptions<any> = {}
 ) => {
-  const [productsCount, setProductsCount] = useState<number>(0);
   const { data } = useFetchProducts(options);
 
-  useEffect(() => {
-    if (data?.totalItems !== undefined) {
-      setProductsCount(data.totalItems);
-    }
-  }, [data?.totalItems]);
-
-  return productsCount;
+  return data?.totalItems ?? 0;
 };
 
 /**
@@ -64,14 +57,16 @@ export function useFetchProduct(
   idToFetch?: string,
   options: UseStorefrontMethodOptions<any> = {}
 ) {
+  const modifiedOptions = { ...options };
+
   if (idToFetch) {
-    options.fetchOptions = idToFetch;
-    options.autoFetch = true;
+    modifiedOptions.fetchOptions = idToFetch;
+    modifiedOptions.autoFetch = true;
   }
 
   let result = useStorefrontMethod<StorefrontGetProductResponse>("getProduct", {
     autoFetch: false,
-    ...options,
+    ...modifiedOptions,
   });
 
   if (useIsStageEnvironment()) {

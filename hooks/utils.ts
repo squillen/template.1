@@ -28,11 +28,10 @@ export function useIsMobile() {
  * Checks if the current environment is a staging environment
  */
 export function useIsStageEnvironment() {
-  const [isStage, setIsStage] = useState(true);
-
-  useEffect(() => {
+  const isStage = useMemo(() => {
+    if (typeof window === 'undefined') return true;
     const hostname = window.location.hostname;
-    setIsStage(hostname.endsWith("vusercontent.net"));
+    return hostname.endsWith("vusercontent.net");
   }, []);
 
   return isStage;
@@ -44,21 +43,12 @@ export function useIsStageEnvironment() {
 export function usePageTracking() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const initialPage = useMemo(() => {
+  const page = useMemo(() => {
     const p = Number(searchParams.get("page") || 1);
     return Number.isFinite(p) && p > 0 ? p : 1;
   }, [searchParams]);
-  const [page, setPage] = useState<number>(initialPage);
-
-  useEffect(() => {
-    // Keep local state in sync if URL changes externally
-    const p = Number(searchParams.get("page") || 1);
-    const safe = Number.isFinite(p) && p > 0 ? p : 1;
-    if (safe !== page) setPage(safe);
-  }, [searchParams, page]);
 
   const handlePageChange = (nextPage: number) => {
-    setPage(nextPage);
     const sp = new URLSearchParams(Array.from(searchParams.entries()));
     sp.set("page", String(nextPage));
     router.push(`?${sp.toString()}`);

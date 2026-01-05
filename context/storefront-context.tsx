@@ -1,6 +1,6 @@
 "use client";
 
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
@@ -177,8 +177,6 @@ export function useStorefrontMethod<T>(
     onErrorRef.current = onError;
   }, [onSuccess, onError]);
 
-  // Serialize fetchOptions for cache key and dependency tracking
-  const fetchOptionsString = JSON.stringify(fetchOptions);
 
   const makeRequest = useCallback(
     async (args: any[] | any = []) => {
@@ -251,7 +249,7 @@ export function useStorefrontMethod<T>(
     return () => {
       isMountedRef.current = false;
     };
-  }, [sdk, autoFetch, makeRequest, fetchOptionsString]);
+  }, [sdk, autoFetch, makeRequest, fetchOptions]);
 
   return {
     data,

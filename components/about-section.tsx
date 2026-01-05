@@ -9,9 +9,9 @@ export function AboutSection() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-balance mb-6">About Our Company</h2>
             <p className="text-lg text-muted-foreground text-pretty mb-6">
-              With over a decade of experience, we've been helping businesses transform and grow through innovative
+              {`With over a decade of experience, we've been helping businesses transform and grow through innovative
               solutions and strategic partnerships. Our team of experts is dedicated to delivering exceptional results
-              that exceed expectations.
+              that exceed expectations.`}
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">

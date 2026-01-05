@@ -44,16 +44,9 @@ export function useFetchServices(
 export const useServicesCount = (
   options: UseStorefrontMethodOptions<any> = {}
 ) => {
-  const [servicesCount, setServicesCount] = useState<number>(0);
   const { data } = useFetchServices(options);
 
-  useEffect(() => {
-    if (data?.totalItems !== undefined) {
-      setServicesCount(data.totalItems);
-    }
-  }, [data?.totalItems]);
-
-  return servicesCount;
+  return data?.totalItems ?? 0;
 };
 
 export const useFetchService = useFetchProduct;
