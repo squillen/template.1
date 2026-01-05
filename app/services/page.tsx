@@ -1,5 +1,5 @@
-import { ProductsOrServicesSection } from "@/components/ui/products-or-services-section";
+import SuspendedProductsOrServicesSection from "@/components/ui/suspended-products-or-services-section";
 
 export default function ServicesPage() {
-  return <ProductsOrServicesSection type="services" />;
+  return <SuspendedProductsOrServicesSection type="services" />;
 }

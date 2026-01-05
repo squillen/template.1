@@ -42,7 +42,7 @@ export function useIsStageEnvironment() {
  * Hook to manage page tracking via URL search parameters
  */
 export function usePageTracking() {
-    const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const initialPage = useMemo(() => {
     const p = Number(searchParams.get("page") || 1);
