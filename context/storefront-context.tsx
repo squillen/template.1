@@ -8,8 +8,10 @@ import {
   ReactNode,
   useRef,
   useCallback,
+  useMemo,
 } from "react";
 import { cacheManager } from "@/lib/cache-manager";
+import { useIsStageEnvironment } from "@/hooks/utils";
 
 interface StorefrontSDKConfig {
   merchantId: string;
@@ -36,12 +38,13 @@ export function StorefrontProvider({
   children,
   config,
 }: {
-  children: ReactNode;
-  config: StorefrontSDKConfig;
+  readonly children: ReactNode;
+  readonly config: StorefrontSDKConfig;
 }) {
   const [sdk, setSdk] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const isStageEnvironment = useIsStageEnvironment();
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -50,6 +53,7 @@ export function StorefrontProvider({
 
     const initializeSDK = () => {
       if (
+        !isStageEnvironment &&
         typeof window !== "undefined" &&
         (window as any).PayPalStorefrontSDK
       ) {
@@ -88,16 +92,19 @@ export function StorefrontProvider({
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [config.merchantId, config.storefrontToken]);
+  }, [config.merchantId, config.storefrontToken, isStageEnvironment]);
 
   // Cache management methods
-  const invalidateCache = useCallback((methodName: string, fetchOptions?: any) => {
-    if (fetchOptions) {
-      cacheManager.invalidate(methodName, fetchOptions);
-    } else {
-      cacheManager.invalidateAll(methodName);
-    }
-  }, []);
+  const invalidateCache = useCallback(
+    (methodName: string, fetchOptions?: any) => {
+      if (fetchOptions) {
+        cacheManager.invalidate(methodName, fetchOptions);
+      } else {
+        cacheManager.invalidateAll(methodName);
+      }
+    },
+    []
+  );
 
   const clearCache = useCallback(() => {
     cacheManager.clear();
@@ -107,15 +114,18 @@ export function StorefrontProvider({
     return cacheManager.getStats();
   }, []);
 
-  const value = {
-    sdk,
-    isLoading,
-    error,
-    config,
-    invalidateCache,
-    clearCache,
-    getCacheStats,
-  };
+  const value = useMemo(
+    () => ({
+      sdk,
+      isLoading,
+      error,
+      config,
+      invalidateCache,
+      clearCache,
+      getCacheStats,
+    }),
+    [sdk, isLoading, error, config, invalidateCache, clearCache, getCacheStats]
+  );
 
   return (
     <StorefrontContext.Provider value={value}>
@@ -176,7 +186,6 @@ export function useStorefrontMethod<T>(
     onSuccessRef.current = onSuccess;
     onErrorRef.current = onError;
   }, [onSuccess, onError]);
-
 
   const makeRequest = useCallback(
     async (args: any[] | any = []) => {
