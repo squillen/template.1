@@ -3,7 +3,6 @@ import {
   useStorefrontMethod,
   type UseStorefrontMethodOptions,
 } from "@/context/storefront-context";
-import { useEffect, useState } from "react";
 import { useIsStageEnvironment } from "../utils";
 import { mockProductsData } from "@/lib/products-data";
 import { mockServicesData } from "@/lib/services-data";

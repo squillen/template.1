@@ -10,13 +10,12 @@ export function ProductOrServiceCardContent({
   productIndex,
   type = "products",
 }: {
-  item: Product;
-  productIndex: number;
-  type?: "products" | "services";
+  readonly item: Product;
+  readonly productIndex: number;
+  readonly type?: "products" | "services";
 }) {
   // todo move this to its own component so that only it will use state
   const [quantity, setQuantity] = useState(1);
-
   const variant = item?.variants?.[0] || {};
   const name = variant.name || item.name;
   const description = variant.description || item.description;
@@ -26,7 +25,7 @@ export function ProductOrServiceCardContent({
 
   return (
     <div className="w-full space-y-3">
-      <div className="bg-card border border-border rounded-lg p-4 shadow-md hover:shadow-lg transition-all">
+      <div className="bg-card border border-border rounded-lg p-4 shadow-md hover:shadow-lg transition-all min-h-[450px]">
         <div className="flex items-start justify-center space-x-2">
           <div className="w-full">
             <div className="aspect-square relative mb-4 overflow-hidden rounded-lg ring-1 ring-border/50">

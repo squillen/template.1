@@ -8,12 +8,14 @@ import { Loading } from "./loading";
  */
 export default function SuspendedProductsOrServicesSection({
   type,
+  withSearch,
 }: {
-  type?: "products" | "services";
+  readonly type?: "products" | "services";
+  readonly withSearch?: boolean;
 }) {
-	return (
-		<Suspense fallback={<Loading />}>
-			<ProductsOrServicesSection type={type} />
-		</Suspense>
-	)
+  return (
+    <Suspense fallback={<Loading />}>
+      <ProductsOrServicesSection type={type} withSearch={withSearch} />
+    </Suspense>
+  );
 }

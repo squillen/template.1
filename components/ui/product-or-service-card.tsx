@@ -7,10 +7,10 @@ import { Product } from "@/app/types/requests/storefront";
 
 
 interface ProductOrServiceCardProps {
-  item: Product;
-  productIndex?: number;
-  type: "products" | "services";
-  showFooter?: boolean;
+  readonly item: Product;
+  readonly productIndex?: number;
+  readonly type: "products" | "services";
+  readonly showFooter?: boolean;
 }
 
 export function ProductOrServiceCard({
@@ -20,8 +20,8 @@ export function ProductOrServiceCard({
   showFooter = true,
 }: ProductOrServiceCardProps) {
   return (
-    <Card className="bg-card border-border hover:shadow-lg transition-shadow relative">
-      <div className="p-4 pt-0">
+    <Card className="bg-card border-border hover:shadow-lg transition-shadow relative flex flex-col h-full min-h-[400px]">
+      <div className="p-4 pt-0 mb-15 flex-grow">
         <ProductOrServiceCardContent
           item={item}
           productIndex={productIndex}
@@ -29,14 +29,14 @@ export function ProductOrServiceCard({
         />
       </div>
       {showFooter && (
-        <div className="p-4 pt-0 absolute bottom-px">
+        <div className="p-4 pt-0 absolute bottom-4 left-0 right-0">
           <Link
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200 hover:underline"
+            className="group inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-primary hover:text-primary-foreground bg-primary/10 hover:bg-primary rounded-lg transition-all duration-200 hover:gap-2.5 hover:shadow-md hover:scale-105 active:scale-100"
             href={`/${type}/${item.id}`}
           >
             See more
             <svg
-              className="w-3 h-3 ml-1"
+              className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

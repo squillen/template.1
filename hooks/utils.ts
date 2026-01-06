@@ -56,3 +56,19 @@ export function usePageTracking() {
 
   return { page, handlePageChange };
 }
+
+/**
+ * Custom hook to debounce a function call by a specified delay
+ */
+export function useDebounce(fnToInvoke: () => void, delay: number) {
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      fnToInvoke();
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [fnToInvoke, delay]);
+}
+

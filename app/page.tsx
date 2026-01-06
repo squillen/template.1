@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <SuspendedProductsOrServicesSection />
+      <SuspendedProductsOrServicesSection withSearch={false} />
     </>
   );
 }
