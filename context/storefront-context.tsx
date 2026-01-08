@@ -171,8 +171,8 @@ export function useStorefrontMethod<T>(
   const [error, setError] = useState<Error | null>(null);
 
   const {
-    onSuccess,
-    onError,
+    onSuccess = (...args: any[]) => args,
+    onError = (...args: any[]) => args,
     autoFetch = true,
     fetchOptions,
     useCache = true, // Default to caching

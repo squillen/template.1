@@ -9,7 +9,7 @@ import {
 export function useGetCart(
   options: UseStorefrontMethodOptions<any> = {}
 ) {
-  return useStorefrontMethod("getCart", { autoFetch: true, ...options });
+  return useStorefrontMethod("getCart", { autoFetch: true, useCache: false, ...options });
 }
 
 /**
@@ -18,7 +18,7 @@ export function useGetCart(
 export function useViewCart(
   options: UseStorefrontMethodOptions<any> = {}
 ) {
-  return useStorefrontMethod("viewCart", { autoFetch: false, ...options });
+  return useStorefrontMethod("viewCart", { autoFetch: true, useCache: false, ...options });
 }
 
 /**
@@ -27,5 +27,5 @@ export function useViewCart(
 export function useAddToCart(
   options: UseStorefrontMethodOptions<any> = {}
 ) {
-  return useStorefrontMethod("addToCart", { autoFetch: false, ...options });
+  return useStorefrontMethod("addToCart", { autoFetch: false, useCache: false, ...options });
 }

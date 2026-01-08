@@ -74,7 +74,7 @@ export function ProductOrServiceCardContent({
       </div>
       <AddToCartButton
         quantity={quantity}
-        productId={variant.id}
+        productId={item.id}
         variantId={variant.id}
         type={type}
       />
