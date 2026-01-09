@@ -245,7 +245,7 @@ export function useStorefrontMethod<T>(
         }
       }
     },
-    [sdk, methodName, useCache]
+    [methodName, sdk, useCache]
   );
 
   useEffect(() => {

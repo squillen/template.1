@@ -21,18 +21,34 @@ export default function AddToCartButton({
   readonly type: "products" | "services";
 }) {
   const isStage = useIsStageEnvironment();
-  const { makeRequest: addToCart, isLoading } = useAddToCart();
-  const handleAddToCart = async () => {
-    try {
-      await addToCart({
+  const handleAddToCartSuccess = () => {
+    toast.success("Added to cart!");
+    cartEvents.emit();
+  };
+
+  const { makeRequest: addToCart, isLoading } = useAddToCart({
+    onError: (error) => {
+      const mappedError =
+        {
+          INSUFFICIENT_INVENTORY: "There are no more items available in stock.",
+        }[error?.message] ||
+        error?.message ||
+        "Failed to add to cart";
+
+      toast.error(mappedError);
+    },
+    onSuccess: handleAddToCartSuccess,
+  });
+
+  const handleAddToCart = () => {
+    if (isStage) {
+      handleAddToCartSuccess();
+    } else {
+      addToCart({
         quantity,
         productId,
         variantId,
       });
-
-      cartEvents.emit();
-    } catch (error) {
-      toast.error("Failed to add to cart");
     }
   };
 
@@ -41,12 +57,7 @@ export default function AddToCartButton({
   return (
     <Button
       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md hover:shadow-lg transition-all h-11"
-      onClick={
-        isStage
-          ? () =>
-              console.log("Add to Cart clicked in development mode", productId)
-          : handleAddToCart
-      }
+      onClick={handleAddToCart}
       disabled={isLoading}
     >
       {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : buttonText}

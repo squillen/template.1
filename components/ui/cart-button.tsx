@@ -1,32 +1,40 @@
 import { useGetCart, useViewCart } from "@/hooks/storefront/cart";
+import { useIsStageEnvironment } from "@/hooks/utils";
 import { cartEvents } from "@/lib/events/cart";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 /**
  * Displays a cart button with the number of items in the cart.
  */
 export default function CartButton() {
+  const isStageEnv = useIsStageEnvironment();
+  const [stageCartCount, setStageCartCount] = useState(0);
   const { data: cartLink, makeRequest: refetchCartLink } = useViewCart();
   const { data, makeRequest: refetchCart } = useGetCart();
   const { items = [] } = data || {};
-  const totalItems = items.length;
+  const totalItems = items.length || stageCartCount;
   const cartCount = useRef(totalItems);
 
   useEffect(() => {
-    const unsubscribe = cartEvents.subscribe(() => {
-      console.log("Cart updated, refetching...");
-      refetchCart?.();
-      refetchCartLink?.();
-    });
+    const refetchCartData = () => {
+      if (isStageEnv) {
+        setStageCartCount((prevCount) => prevCount + 1);
+      } else {
+        refetchCart?.();
+        refetchCartLink?.();
+      }
+    };
+
+    const unsubscribe = cartEvents.subscribe(refetchCartData);
 
     // Refetch cart when window regains focus
     const handleFocus = () => {
-      console.log("Window focused, refetching cart...");
-      refetchCart?.();
-      refetchCartLink?.();
+      if (!isStageEnv) {
+        refetchCartData();
+      }
     };
 
     window.addEventListener("focus", handleFocus);
@@ -35,16 +43,25 @@ export default function CartButton() {
       unsubscribe();
       window.removeEventListener("focus", handleFocus);
     };
-  }, [refetchCart, refetchCartLink]);
+  }, [isStageEnv, refetchCart, refetchCartLink]);
 
   useEffect(() => {
-    if (cartCount.current < totalItems) {
-      toast.success("Added to cart!");
-    } else if (cartCount.current !== 0) {
+    if (cartCount.current > totalItems && totalItems !== 0) {
       toast.success("Cart updated!");
     }
+
     cartCount.current = totalItems;
   }, [totalItems]);
+
+  const handleCartClick = () => {
+    if (isStageEnv) {
+      toast.info(
+        "Cart functionality is only available when your site is live."
+      );
+    } else if (!totalItems) {
+      toast.info("Your cart is empty");
+    }
+  };
 
   const shoppingCart = (
     <>
@@ -57,18 +74,7 @@ export default function CartButton() {
     </>
   );
 
-  return typeof cartLink !== "string" ? (
-    <button
-      className="relative flex-shrink-0 ml-auto bg-transparent border-none p-0 cursor-pointer"
-      onClick={() => {
-        if (!totalItems) {
-          toast.info("Your cart is empty");
-        }
-      }}
-    >
-      {shoppingCart}
-    </button>
-  ) : (
+  return typeof cartLink === "string" ? (
     <Link
       href={cartLink}
       target="_blank"
@@ -76,5 +82,12 @@ export default function CartButton() {
     >
       {shoppingCart}
     </Link>
+  ) : (
+    <button
+      className="relative flex-shrink-0 ml-auto bg-transparent border-none p-0 cursor-pointer"
+      onClick={handleCartClick}
+    >
+      {shoppingCart}
+    </button>
   );
 }
