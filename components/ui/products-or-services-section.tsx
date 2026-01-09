@@ -35,7 +35,7 @@ export function ProductsOrServicesSection({
     fetchOptions: {
       page,
       pageSize,
-      search: searchInput?.replaceAll("'", ""),
+      search: searchInput || "",
     },
   });
 

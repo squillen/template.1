@@ -11,7 +11,7 @@ import { Error } from "./error";
 export default function ProductOrServicePage({
   type,
 }: {
-  type: "products" | "services";
+  readonly type: "products" | "services";
 }) {
   const { id } = useParams();
   const { data, isLoading, error } = useFetchProduct(id as string);

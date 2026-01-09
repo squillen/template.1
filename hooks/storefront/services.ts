@@ -49,4 +49,4 @@ export const useServicesCount = (
   return data?.totalItems ?? 0;
 };
 
-export const useFetchService = useFetchProduct;
+export { useFetchProduct as useFetchService } from "./products";

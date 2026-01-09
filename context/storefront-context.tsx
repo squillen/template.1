@@ -12,6 +12,7 @@ import {
 } from "react";
 import { cacheManager } from "@/lib/cache-manager";
 import { useIsStageEnvironment } from "@/hooks/utils";
+import { isSearchInputSafe, sanitizeSearchInput } from "@/lib/sanitize";
 
 interface StorefrontSDKConfig {
   merchantId: string;
@@ -187,9 +188,29 @@ export function useStorefrontMethod<T>(
     onErrorRef.current = onError;
   }, [onSuccess, onError]);
 
+  function formatAndSanitizeArgs(args: any[] | any = []) {
+    const formattedArgs = Array.isArray(args) ? args : [args];
+
+    // Sanitize search input if present in fetchOptions
+    if (formattedArgs[0] && typeof formattedArgs[0] === "object" && formattedArgs[0].search) {
+      // Validate safety
+      if (!isSearchInputSafe(formattedArgs[0].search)) {
+        const err = new Error("Invalid search input detected");
+        console.error(err);
+        setError(err);
+        return;
+      }
+
+      // Final sanitization layer
+      formattedArgs[0].search = sanitizeSearchInput(formattedArgs[0].search);
+    }
+
+    return formattedArgs;
+  }
+
   const makeRequest = useCallback(
     async (args: any[] | any = []) => {
-      args = Array.isArray(args) ? args : [args];
+      args = formatAndSanitizeArgs(args);
 
       if (!sdk) {
         console.log(`Fetch skipped - SDK: ${!!sdk}`);
@@ -229,7 +250,7 @@ export function useStorefrontMethod<T>(
             cacheManager.set(methodName, result, args[0]);
           }
 
-          onSuccessRef.current?.(result);
+          onSuccessRef.current?.(result as T);
         }
       } catch (err) {
         console.error(`Error fetching ${methodName}:`, err);

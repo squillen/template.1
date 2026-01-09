@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Search, X } from "lucide-react";
 import { useDebounce } from "@/hooks/utils";
+import { sanitizeSearchInput } from "@/lib/sanitize";
 
 /**
  * A search bar component that allows users to input search queries. It debounces the input to prevent excessive API calls.
@@ -18,14 +19,17 @@ export default function SearchBar({
   const [localInput, setLocalInput] = useState<string | null>(searchInput);
   const fnToInvoke = () => {
     if (localInput !== null) {
-      setSearchInput(localInput);
+      const sanitizedInput = sanitizeSearchInput(localInput);
+      setSearchInput(sanitizedInput);
     }
   };
   useDebounce(fnToInvoke, 500);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      setSearchInput(localInput || "");
+      const sanitizedInput = sanitizeSearchInput(localInput);
+
+      setSearchInput(sanitizedInput);
     }
   };
 
