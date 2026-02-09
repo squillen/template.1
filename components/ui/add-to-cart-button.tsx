@@ -26,7 +26,7 @@ export default function AddToCartButton({
 }) {
   const isStage = useIsStageEnvironment();
   const handleAddToCartSuccess = () => {
-    toast.success("Added to cart!");
+    toast.success("Added to cart!", { position: 'bottom-center'});
     cartEvents.emit();
   };
 

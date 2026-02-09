@@ -24,13 +24,14 @@ interface BookedSlot {
 
 type StoreSlot = { hour: number; minute: number; label: string }
 type StoreHours = { open: number; close: number }
+type StoreSlotOpenMap = Set<string>;
 
 // Store hours configuration
 const storeHours: Record<number, StoreHours | null> = {
   0: null, // Sunday - closed
   1: { open: 9, close: 18 }, // Monday
-  2: { open: 9, close: 18 }, // Tuesday
-  3: { open: 9, close: 18 }, // Wednesday
+  2: { open: 12, close: 20 }, // Tuesday
+  3: { open: 10, close: 16 }, // Wednesday
   4: { open: 9, close: 18 }, // Thursday
   5: { open: 9, close: 18 }, // Friday
   6: { open: 9, close: 14 }, // Saturday
@@ -85,23 +86,29 @@ export default function ServiceAppointmentPage() {
     return slots;
   }, []);
 
-  const timeSlotsPerDay = useMemo(() => {
+  const timeSlotsPerDay: StoreSlotOpenMap = useMemo(() => {
+    const map = new Set<string>()
     for (let day = 0; day < 7; day++) {
-      const hours = storeHours[day]
+      const date = addDays(currentWeekStart, day);
+      const dayOfWeek = date.getDay();
+      const hours = storeHours[dayOfWeek];
       if (hours) {
         for (let hour = hours.open; hour < hours.close; hour++) {
-          storeHoursSlots[day].push({ hour, minute: 0, label: format(new Date().setHours(hour, 0), "h:mm a") });
-          storeHoursSlots[day].push({ hour, minute: 30, label: format(new Date().setHours(hour, 30), "h:mm a") });
+          const key = (day*10000)+(hour*100);
+          map.add(`${dayOfWeek}-${hour}-0`);
+          map.add(`${dayOfWeek}-${hour}-30`);
         }
       }
     }
+    console.log(map);
+    return map;
   }, [timeSlots])
 
-  // Generate random booked slots for the demo
   const bookedSlots: BookedSlot[] = useMemo(() => {
     const slots: BookedSlot[] = [];
     const seed = currentWeekStart.getTime();
     
+    // Generate random booked slots for the demo
     const durations = [30, 60, 90, 120];
     for (let i = 0; i < 6; i++) {
       const dayIndex = ((seed / 1000 + i * 7) % 6); // 0-5 (Mon-Sat)
@@ -165,15 +172,14 @@ export default function ServiceAppointmentPage() {
   };
 
   // Check if slot is within store hours
-  const isWithinStoreHours = (dayIndex: number, hour: number, minute: number) => {
+  const isWithinStoreHours = (timeSlotsPerDay: StoreSlotOpenMap, dayIndex: number, hour: number, minute: number) => {
     const day = weekDays[dayIndex];
     if (!day.isOpen) return false;
-    
-    const slotMinutes = hour * 60 + minute;
-    const openMinutes = day.openHour * 60;
-    const closeMinutes = day.closeHour * 60;
-    
-    return slotMinutes >= openMinutes && slotMinutes < closeMinutes;
+
+    const dayNum = day.date.getDay()
+
+    const key = `${dayNum}-${hour}-${minute}`;
+    return timeSlotsPerDay.has(key);
   };
 
   // Get booked slot display info for rendering
@@ -191,7 +197,7 @@ export default function ServiceAppointmentPage() {
       isSlotBooked(dayIndex, hour, minute) ||
       isPastSlot(date, hour, minute) ||
       isSlotPastClosing(dayIndex, hour, minute) ||
-      !isWithinStoreHours(dayIndex, hour, minute)
+      !isWithinStoreHours(timeSlotsPerDay, dayIndex, hour, minute)
     ) {
       return;
     }
@@ -348,7 +354,7 @@ export default function ServiceAppointmentPage() {
 
                         {/* Time slots */}
                         {timeSlots.map((slot) => {
-                          if (!isWithinStoreHours(day.dayIndex, slot.hour, slot.minute)) {
+                          if (!isWithinStoreHours(timeSlotsPerDay, day.dayIndex, slot.hour, slot.minute)) {
                             return (
                               <div 
                                 key={`slot-${day.dayIndex}-${slot.hour}-${slot.minute}`}
