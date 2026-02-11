@@ -14,19 +14,15 @@ export default function AddToCartButton({
   productId,
   variantId,
   type,
-  disabled,
-  width,
 }: {
   readonly quantity: number;
   readonly productId: string;
   readonly variantId: string;
   readonly type: "products" | "services";
-  readonly disabled?: boolean;
-  readonly width?: "full" | "auto";
 }) {
   const isStage = useIsStageEnvironment();
   const handleAddToCartSuccess = () => {
-    toast.success("Added to cart!", { position: 'bottom-center'});
+    toast.success("Added to cart!");
     cartEvents.emit();
   };
 
@@ -56,13 +52,13 @@ export default function AddToCartButton({
     }
   };
 
-  const buttonText = type === "services" ? "Confirm Appointment Time" : "Add to Cart";
+  const buttonText = type === "services" ? "Book Service" : "Add to Cart";
 
   return (
     <Button
-      className={`${width === 'full' ? 'w-full' : 'w-auto min-w-[160px]'} bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md hover:shadow-lg transition-all h-11`}
+      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md hover:shadow-lg transition-all h-11"
       onClick={handleAddToCart}
-      disabled={isLoading || disabled}
+      disabled={isLoading}
     >
       {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : buttonText}
     </Button>

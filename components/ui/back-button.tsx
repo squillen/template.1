@@ -4,10 +4,10 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "./button";
 import { usePathname, useRouter } from "next/navigation";
 
-export function BackButton({ alwaysShow = false }: { alwaysShow?: boolean }) {
+export function BackButton() {
   const router = useRouter();
   const pathname = usePathname();
-  const shouldShowBackButton = alwaysShow || /^\/(products|services)\/[^/]+$/.test(pathname);
+  const shouldShowBackButton = /^\/(products|services)\/[^/]+$/.test(pathname);
 
   return (
     shouldShowBackButton && (
