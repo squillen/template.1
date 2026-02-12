@@ -49,7 +49,13 @@ export type Product = {
   image?: Image;
   images?: Image[];
   variants: Variant[];
+  metadata?: ProductMetaData;
 };
+
+export type ProductMetaData = {
+  item_type: "SERVICE" | "PRODUCT"
+  duration: number
+}
 
 export interface StorefrontGetProductsResponse {
   products: Product[]; // Array of products
@@ -65,7 +71,7 @@ export interface StorefrontGetProductResponse {
   id?: string; // Product identifier
   name?: string; // Product name
   description?: string; // Product description
-  type?: "PHYSICAL_GOODS" | "DIGITAL_GOODS" | "DONATION";
+  type?: "PHYSICAL_GOODS" | "DIGITAL_GOODS" | "DONATION" | "SERVICES";
   status?: "ACTIVE" | "DRAFT" | "ARCHIVED";
   labels?: string[]; // Product labels for categorization
   image?: Image; // Primary product image

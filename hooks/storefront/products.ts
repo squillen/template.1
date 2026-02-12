@@ -7,6 +7,7 @@ import { useIsStageEnvironment } from "../utils";
 import { mockProductsData } from "@/lib/products-data";
 import { mockServicesData } from "@/lib/services-data";
 import {
+  Product,
   StorefrontGetProductResponse,
   StorefrontGetProductsResponse,
 } from "@/app/types/requests/storefront";
@@ -29,6 +30,19 @@ export function useFetchProducts(
       ...restOptions,
     }
   );
+
+  if (result.data && result.data.products) {
+    const products = filterInventoryResponseFor('products', result.data.products);
+    result = {
+      data: { 
+        products, 
+        totalItems: result.data.totalItems,
+        totalPages: result.data.totalPages ?? 1
+      },
+      isLoading: false,
+      error: null,
+    } as typeof result;
+  }
 
   if (useIsStageEnvironment()) {
     result = {
@@ -80,4 +94,9 @@ export function useFetchProduct(
   }
 
   return result;
+}
+
+export function filterInventoryResponseFor(type:"products"|"services", products:Product[]) {
+  const include = type !== 'products';
+  return products.filter(p => p.variants[0].sku?.startsWith('SERVICE-') === include);
 }
