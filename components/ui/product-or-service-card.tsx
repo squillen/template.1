@@ -17,18 +17,18 @@ export function ProductOrServiceCard({
   item,
   productIndex = 1,
   type,
-  showFooter = true,
+  showFooter = false,
 }: ProductOrServiceCardProps) {
   return (
     <Card className="bg-card border-border hover:shadow-lg transition-shadow relative flex flex-col h-full min-h-[400px]">
-      <div className="p-4 pt-0 mb-15 flex-grow">
+      {/* <div className="p-4 pt-0 mb-15 flex-grow"> */}
         <ProductOrServiceCardContent
           item={item}
           productIndex={productIndex}
           type={type}
         />
-      </div>
-      {showFooter && (
+      {/* </div> */}
+      {/* {showFooter && (
         <div className="p-4 pt-0 absolute bottom-4 left-0 right-0">
           <Link
             className="group inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-primary hover:text-primary-foreground bg-primary/10 hover:bg-primary rounded-lg transition-all duration-200 hover:gap-2.5 hover:shadow-md hover:scale-105 active:scale-100"
@@ -50,7 +50,7 @@ export function ProductOrServiceCard({
             </svg>
           </Link>
         </div>
-      )}
+      )} */}
     </Card>
   );
 }
