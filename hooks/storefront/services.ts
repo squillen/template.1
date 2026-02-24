@@ -20,8 +20,8 @@ export function useFetchServices(
   let result = useStorefrontMethod<StorefrontGetProductsResponse>("getProducts", {
     fetchOptions: {
       includeTotalCount: true,
-      // filter: `type:SERVICE`,
       ...(fetchOptions as FetchOptions),
+      pageSize: 10000 // fetch all services until we can properly fetch services (e.g. using a filter)
     },
     ...restOptions,
   });
@@ -29,7 +29,7 @@ export function useFetchServices(
   if (result.data && result.data.products) {
     const products = filterInventoryResponseFor('services', result.data.products);
     result = {
-      data: { 
+      data: {
         products: products.map(p => ({...p, type: "SERVICES"})),
         totalItems: result.data.totalItems,
         totalPages: result.data.totalPages ?? 1
